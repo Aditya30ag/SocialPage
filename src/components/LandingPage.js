@@ -16,6 +16,7 @@ import LocalStatsSection from "./LocalStatsSection";
 import QuickApplyProcess from "./QuickApplyProcess";
 import Contact from "./Contact";
 import ParticleCanvas from "./ParticleCanvas";
+import IntroAnimation from "./IntroAnimation ";
 
 const LandingPage = () => {
   const [isVisible, setIsVisible] = useState({});
@@ -142,42 +143,9 @@ const LandingPage = () => {
   ];
   return (
     <div className="min-h-screen bg-black text-slate-50 font-sans overflow-hidden">
-      {/* Animated Background - Enhanced gradient animation */}
-      <ParticleCanvas/>
+     
       
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-24 py-12 sm:py-20 lg:py-32">
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-900/90 to-black opacity-90"></div>
-        <div className="relative z-10 max-w-5xl mx-auto text-center">
-          {/* Title */}
-          <div className="mb-8 relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 animate-pulse"></div>
-            <h1 className="relative p-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text leading-tight tracking-tight">
-              Empower Your Network, Earn Rewards
-            </h1>
-          </div>
-          {/* Subtitle */}
-          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-8 text-slate-300 font-light leading-relaxed max-w-4xl mx-auto px-4 mt-12 ">
-            Turn your influence into opportunities while building passive
-            income. Bridge the gap between jobs and job seekers in your
-            community.
-          </p>
-          {/* CTA Button */}
-          <button className="group relative px-8 py-4 rounded-2xl text-xl font-bold transition-all duration-300 ease-out hover:scale-105 mt-6">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 opacity-90 rounded-2xl"></div>
-            <div className="absolute inset-0.5 bg-black rounded-2xl"></div>
-            <span className="relative z-10 flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
-              Join as an Influencer{" "}
-              <ExternalLink className="w-5 h-5 text-cyan-400 transition-transform group-hover:translate-x-1" />
-            </span>
-          </button>
-          {/* Bottom Text */}
-          <p className="text-lg text-slate-400 font-light mt-12 px-4">
-            No upfront costs. Quick registration. Start making a difference
-            today!
-          </p>
-        </div>
-      </section>
+      <IntroAnimation/>
 
       {/* Companies Marquee */}
       <div className="py-8 bg-black/60 backdrop-blur-xl border-t border-b border-slate-800/50 overflow-hidden relative">
