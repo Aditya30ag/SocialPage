@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Building2, Users, Heart, Star, TrendingUp, ExternalLink, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { Building2, Users, Heart, Star, TrendingUp, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import ParticleCanvas from './ParticleCanvas';
 
 const IntroAnimation = () => {
     const [currentScene, setCurrentScene] = useState(0);
-    const [isPlaying, setIsPlaying] = useState(true);
+
     const [direction, setDirection] = useState('right');
     
     useEffect(() => {
-      if (isPlaying) {
+    
         const timer = setInterval(() => {
           setCurrentScene(prev => (prev + 1) % scenes.length);
           setDirection('right');
         }, 4000);
         return () => clearInterval(timer);
       }
-    }, [isPlaying]);
+    );
   
     const goToSlide = (index) => {
       setDirection(index > currentScene ? 'right' : 'left');
@@ -32,217 +32,205 @@ const IntroAnimation = () => {
       setCurrentScene((prev) => (prev + 1) % scenes.length);
     };
 
-    const togglePlayPause = () => {
-        setIsPlaying(!isPlaying);
-      };
+
   
-  const scenes = [
-    {
-      content: (
-        <div className="text-center max-w-5xl mx-auto space-y-6 sm:space-y-8 px-4 animate-slide-up">
-          <h1 className="text-5xl sm:text-7xl lg:text-9xl xl:text-[10rem] font-bold transform hover:scale-105 transition-transform duration-300">
-            <span className="bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text animate-gradient-x">
-              Hirecentive
-            </span>
-          </h1>
-          <div className="text-2xl sm:text-3xl lg:text-4xl text-cyan-400 animate-bounce-slow">
-            Social
+    const scenes = [
+      {
+        content: (
+          <div className="text-center max-w-5xl mx-auto space-y-6 sm:space-y-8 px-4 animate-slide-up">
+            <h1 className="text-5xl sm:text-7xl lg:text-9xl xl:text-[10rem] font-bold transform hover:scale-105 transition-transform duration-300">
+              <span className="bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text animate-gradient-x">
+                Hirecentive
+              </span>
+            </h1>
+            <div className="text-2xl sm:text-3xl lg:text-4xl text-cyan-400 animate-bounce-slow">
+              Social
+            </div>
           </div>
-        </div>
-      )
-    },
-    {
-      content: (
-        <div className="text-center px-4 animate-slide-up">
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text leading-tight mb-4 sm:mb-6 animate-gradient-x">
-            Your Influence
-            <br />
-            Their Future
-          </h1>
-        </div>
-      )
-    },
-    {
-      content: (
-        <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16 max-w-6xl mx-auto px-4 animate-slide-up">
-          <div className="text-center md:text-left transform hover:scale-105 transition-transform duration-300 flex items-center justify-center flex-col">
-            <Building2 className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 text-violet-500 mb-4 sm:mb-6 mx-auto md:mx-0 animate-float" />
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">Local Businesses</h2>
-            <p className="text-lg sm:text-xl lg:text-2xl text-slate-300">Struggling to find reliable employees</p>
+        )
+      },
+      {
+        content: (
+          <div className="text-center px-4 animate-slide-up">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text leading-tight mb-4 sm:mb-6 animate-gradient-x">
+              Your Influence
+              <br />
+              Their Future
+            </h1>
           </div>
-          <div className="text-center md:text-left transform hover:scale-105 transition-transform duration-300 flex items-center justify-center flex-col">
-            <Users className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 text-cyan-400 mb-4 sm:mb-6 mx-auto md:mx-0 animate-float" />
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">Your Followers</h2>
-            <p className="text-lg sm:text-xl lg:text-2xl text-slate-300">Looking for job opportunities</p>
+        )
+      },
+      {
+        content: (
+          <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16 max-w-6xl mx-auto px-4 animate-slide-up">
+            <div className="text-center md:text-left transform hover:scale-105 transition-transform duration-300 flex items-center justify-center flex-col">
+              <Building2 className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 text-violet-500 mb-4 sm:mb-6 mx-auto md:mx-0 animate-float" />
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">Local Businesses</h2>
+              <p className="text-lg sm:text-xl lg:text-2xl text-slate-300">Struggling to find reliable employees</p>
+            </div>
+            <div className="text-center md:text-left transform hover:scale-105 transition-transform duration-300 flex items-center justify-center flex-col">
+              <Users className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 text-cyan-400 mb-4 sm:mb-6 mx-auto md:mx-0 animate-float" />
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">Your Followers</h2>
+              <p className="text-lg sm:text-xl lg:text-2xl text-slate-300">Looking for job opportunities</p>
+            </div>
           </div>
-        </div>
-      )
-    },
-    {
-      content: (
-        <div className="max-w-6xl mx-auto text-center space-y-10 sm:space-y-14 px-4 animate-slide-up">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold animate-pulse">
-            Earn <span className="text-cyan-400">₹500-₹5000</span> Per Placement
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10">
-            {[
-              { icon: Heart, color: "text-cyan-400", label: "Make Impact" },
-              { icon: Star, color: "text-violet-500", label: "Build Trust" },
-              { icon: TrendingUp, color: "text-amber-400", label: "Earn More" }
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="relative group transform hover:scale-110 transition-all duration-300"
-              >
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-xl blur opacity-25 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
-                <div className="relative bg-black/40 backdrop-blur-xl p-6 sm:p-8 rounded-xl border border-slate-800">
-                  <div className="flex flex-col items-center">
-                    <item.icon className={`w-12 h-12 sm:w-16 sm:h-16 ${item.color} mb-4 sm:mb-6 animate-float`} />
-                    <span className="text-lg sm:text-xl lg:text-2xl text-slate-200 font-medium">{item.label}</span>
+        )
+      },
+      {
+        content: (
+          <div className="max-w-6xl mx-auto text-center space-y-10 sm:space-y-14 px-4 animate-slide-up">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold animate-pulse">
+              Earn <span className="text-cyan-400">₹500-₹5000</span> Per Placement
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10">
+              {[
+                { icon: Heart, color: "text-cyan-400", label: "Make Impact" },
+                { icon: Star, color: "text-violet-500", label: "Build Trust" },
+                { icon: TrendingUp, color: "text-amber-400", label: "Earn More" }
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  className="relative group transform hover:scale-110 transition-all duration-300"
+                >
+                  <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-xl blur opacity-25 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
+                  <div className="relative bg-black/40 backdrop-blur-xl p-6 sm:p-8 rounded-xl border border-slate-800">
+                    <div className="flex flex-col items-center">
+                      <item.icon className={`w-12 h-12 sm:w-16 sm:h-16 ${item.color} mb-4 sm:mb-6 animate-float`} />
+                      <span className="text-lg sm:text-xl lg:text-2xl text-slate-200 font-medium">{item.label}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      )
-    },
-    {
-      content: (
-        <div className="text-center max-w-4xl mx-auto px-4 animate-slide-up">
-          <div className="transform transition-all duration-300 hover:scale-105">
-            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-8 sm:mb-10 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text animate-gradient-x">
-              Join the Movement
-            </h2>
-            <button className="group relative px-8 sm:px-10 py-4 sm:py-5 rounded-xl text-xl sm:text-2xl lg:text-3xl font-bold transition-all duration-300 hover:scale-110 animate-pulse">
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400"></div>
-              <div className="absolute inset-0.5 bg-black rounded-xl"></div>
-              <span className="relative z-10 flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
-                Get Your Unique Link
-                <ExternalLink className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400 transition-transform group-hover:translate-x-2" />
-              </span>
-            </button>
+        )
+      },
+      {
+        content: (
+          <div className="text-center max-w-4xl mx-auto px-4 animate-slide-up">
+            <div className="transform transition-all duration-300 hover:scale-105">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-8 sm:mb-10 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text animate-gradient-x">
+                Join the Movement
+              </h2>
+              <button className="group relative px-8 sm:px-10 py-4 sm:py-5 rounded-xl text-xl sm:text-2xl lg:text-3xl font-bold transition-all duration-300 hover:scale-110 animate-pulse">
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400"></div>
+                <div className="absolute inset-0.5 bg-black rounded-xl"></div>
+                <span className="relative z-10 flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
+                  Get Your Unique Link
+                  <ExternalLink className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400 transition-transform group-hover:translate-x-2" />
+                </span>
+              </button>
+            </div>
           </div>
-        </div>
-      )
-    }
-  ];
+        )
+      }
+    ];
   
-  return (
-    <div className="min-h-screen bg-black text-white overflow-hidden relative">
-      <ParticleCanvas />
-      
-      <div className="fixed inset-0 opacity-40">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-violet-600 via-transparent to-transparent animate-pulse"></div>
-        <div className="absolute bottom-0 right-0 w-full h-full bg-gradient-to-tl from-cyan-400 via-transparent to-transparent animate-pulse"></div>
-      </div>
-      
-      {/* Navigation Arrows */}
-      <button 
-        onClick={prevSlide}
-        className="fixed left-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-black/30 backdrop-blur-sm border border-slate-700 hover:bg-black/50 transition-all duration-300 group"
-      >
-        <ChevronLeft className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
-      </button>
-      
-      <button 
-        onClick={nextSlide}
-        className="fixed right-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-black/30 backdrop-blur-sm border border-slate-700 hover:bg-black/50 transition-all duration-300 group"
-      >
-        <ChevronRight className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
-      </button>
-      
-      {/* Play/Pause Button */}
-      <button 
-        onClick={togglePlayPause}
-        className="fixed top-4 right-4 z-30 p-2 rounded-full bg-black/30 backdrop-blur-sm border border-slate-700 hover:bg-black/50 transition-all duration-300 group"
-      >
-        {isPlaying ? (
-          <Pause className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
-        ) : (
-          <Play className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
-        )}
-      </button>
-      
-      <div className="relative z-10 min-h-screen flex items-center justify-center p-4 sm:p-6">
-        <div className={`w-full transition-all duration-500 transform 
-          ${direction === 'right' ? 
-            (currentScene === 0 ? 'animate-slide-left-enter' : 'animate-slide-right-enter') : 
-            'animate-slide-left-enter'}`}
-        >
-          {scenes[currentScene].content}
+    return (
+      <div className="relative min-h-screen bg-black text-white overflow-hidden">
+        <ParticleCanvas />
+        
+        <div className="absolute inset-0 opacity-40">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-violet-600 via-transparent to-transparent animate-pulse"></div>
+          <div className="absolute bottom-0 right-0 w-full h-full bg-gradient-to-tl from-cyan-400 via-transparent to-transparent animate-pulse"></div>
         </div>
-      </div>
-  
-      {/* Enhanced Progress Indicators */}
-      <div className="fixed bottom-8 sm:bottom-10 left-1/2 transform -translate-x-1/2 flex gap-2 sm:gap-3 z-20">
-        {scenes.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 cursor-pointer hover:opacity-80
-              ${index === currentScene ? 
-                'w-8 sm:w-10 bg-gradient-to-r from-cyan-400 to-violet-500 animate-pulse' : 
-                'w-1.5 sm:w-2 bg-slate-700'}`}
-          />
-        ))}
-      </div>
+        
+        <div className="relative min-h-screen flex items-center justify-center p-4 sm:p-6">
+          {/* Navigation Arrows */}
+          <button 
+            onClick={prevSlide}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-black/30 backdrop-blur-sm border border-slate-700 hover:bg-black/50 transition-all duration-300 group"
+          >
+            <ChevronLeft className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+          </button>
+          
+          <button 
+            onClick={nextSlide}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-black/30 backdrop-blur-sm border border-slate-700 hover:bg-black/50 transition-all duration-300 group"
+          >
+            <ChevronRight className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+          </button>
+          
+          
 
-      <style>{`
-        @keyframes slide-right-enter {
-          0% { opacity: 0; transform: translateX(50px); }
-          100% { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes slide-left-enter {
-          0% { opacity: 0; transform: translateX(-50px); }
-          100% { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes slide-right-exit {
-          0% { opacity: 1; transform: translateX(0); }
-          100% { opacity: 0; transform: translateX(-50px); }
-        }
-        @keyframes slide-left-exit {
-          0% { opacity: 1; transform: translateX(0); }
-          100% { opacity: 0; transform: translateX(50px); }
-        }
-        .animate-slide-right-enter {
-          animation: slide-right-enter 0.5s ease-out forwards;
-        }
-        .animate-slide-left-enter {
-          animation: slide-left-enter 0.5s ease-out forwards;
-        }
-        .animate-slide-right-exit {
-          animation: slide-right-exit 0.5s ease-out forwards;
-        }
-        .animate-slide-left-exit {
-          animation: slide-left-exit 0.5s ease-out forwards;
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-        @keyframes gradient-x {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        @keyframes bounce-slow {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-15px); }
-        }
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-        .animate-gradient-x {
-          background-size: 200% 200%;
-          animation: gradient-x 3s ease infinite;
-        }
-        .animate-bounce-slow {
-          animation: bounce-slow 2s ease-in-out infinite;
-        }
-      `}</style>
-    </div>
-  );
+          <div className={`w-full transition-all duration-500 transform 
+            ${direction === 'right' ? 
+              (currentScene === 0 ? 'animate-slide-left-enter' : 'animate-slide-right-enter') : 
+              'animate-slide-left-enter'}`}
+          >
+            {scenes[currentScene].content}
+          </div>
+        </div>
+    
+        {/* Progress Indicators */}
+        <div className="absolute bottom-8 sm:bottom-10 left-1/2 transform -translate-x-1/2 flex gap-2 sm:gap-3 z-20">
+          {scenes.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 cursor-pointer hover:opacity-80
+                ${index === currentScene ? 
+                  'w-8 sm:w-10 bg-gradient-to-r from-cyan-400 to-violet-500 animate-pulse' : 
+                  'w-1.5 sm:w-2 bg-slate-700'}`}
+            />
+          ))}
+        </div>
+
+        <style>{`
+          @keyframes slide-right-enter {
+            0% { opacity: 0; transform: translateX(50px); }
+            100% { opacity: 1; transform: translateX(0); }
+          }
+          @keyframes slide-left-enter {
+            0% { opacity: 0; transform: translateX(-50px); }
+            100% { opacity: 1; transform: translateX(0); }
+          }
+          @keyframes slide-right-exit {
+            0% { opacity: 1; transform: translateX(0); }
+            100% { opacity: 0; transform: translateX(-50px); }
+          }
+          @keyframes slide-left-exit {
+            0% { opacity: 1; transform: translateX(0); }
+            100% { opacity: 0; transform: translateX(50px); }
+          }
+          .animate-slide-right-enter {
+            animation: slide-right-enter 0.5s ease-out forwards;
+          }
+          .animate-slide-left-enter {
+            animation: slide-left-enter 0.5s ease-out forwards;
+          }
+          .animate-slide-right-exit {
+            animation: slide-right-exit 0.5s ease-out forwards;
+          }
+          .animate-slide-left-exit {
+            animation: slide-left-exit 0.5s ease-out forwards;
+          }
+          @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+          }
+          @keyframes gradient-x {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+          @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+          }
+          .animate-float {
+            animation: float 3s ease-in-out infinite;
+          }
+          .animate-gradient-x {
+            background-size: 200% 200%;
+            animation: gradient-x 3s ease infinite;
+          }
+          .animate-bounce-slow {
+            animation: bounce-slow 2s ease-in-out infinite;
+          }
+        `}</style>
+      </div>
+    );
 };
 
 export default IntroAnimation;
