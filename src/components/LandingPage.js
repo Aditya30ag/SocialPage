@@ -172,19 +172,19 @@ const LandingPage = () => {
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-10 relative">
           {[
             {
-              title: "Share Opportunities",
+              title: "Unlock Opportunities",
               description:
                 "Register to get your unique link and share it with your followers.",
               icon: "🔗",
             },
             {
-              title: "Build Connections",
+              title: "Help to Build Connections",
               description:
                 "Help job seekers connect with local employers looking for their skills.",
               icon: "📱",
             },
             {
-              title: "Earn Rewards",
+              title: "Get Incentives!",
               description:
                 "Get paid for every successful hire through your link. No limits on earning potential!",
               icon: "💸",
@@ -210,8 +210,7 @@ const LandingPage = () => {
         </div>
         <div className="mt-12 sm:mt-16">
           <p className="relative text-lg sm:text-2xl md:text-3xl font-light text-center text-slate-400 max-w-4xl mx-auto leading-relaxed">
-            Every connection you make not only changes a life but also helps you
-            grow financially.
+          Every connection you create not only makes an impact but also rewards you with incentives while making a difference.
           </p>
         </div>
       </section>

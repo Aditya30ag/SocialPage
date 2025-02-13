@@ -1,7 +1,25 @@
-import React from "react";
-import { ArrowRight } from "lucide-react";
+import React, { useState, useRef } from "react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 
 const JobCategoriesSection = () => {
+  const [showAll, setShowAll] = useState(false);
+  const sectionRef = useRef(null);
+
+  const handleToggle = () => {
+    setShowAll(!showAll);
+    if (showAll) {
+      // Scroll with offset and smooth behavior
+      const yOffset = -20; // Adjust this value based on your header height
+      const element = sectionRef.current;
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      
+      window.scrollTo({
+        top: y,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const localJobs = [
     {
       category: "Retail & Shops",
@@ -39,12 +57,51 @@ const JobCategoriesSection = () => {
       icon: "📚",
       count: "800+ jobs",
     },
+    // Additional job categories
+    {
+      category: "Healthcare",
+      roles: ["Clinic Assistants", "Care Workers", "Medical Admin"],
+      icon: "🏥",
+      count: "1,200+ jobs",
+    },
+    {
+      category: "Beauty & Wellness",
+      roles: ["Salon Staff", "Spa Therapists", "Fitness Trainers"],
+      icon: "💅",
+      count: "900+ jobs",
+    },
+    {
+      category: "Security",
+      roles: ["Security Guards", "Night Watch", "Building Security"],
+      icon: "🛡️",
+      count: "700+ jobs",
+    },
+    {
+      category: "Logistics",
+      roles: ["Warehouse Staff", "Packers", "Stock Controllers"],
+      icon: "📦",
+      count: "1,800+ jobs",
+    },
+    {
+      category: "Transportation",
+      roles: ["Drivers", "Fleet Staff", "Transport Coordinators"],
+      icon: "🚗",
+      count: "1,300+ jobs",
+    },
+    {
+      category: "Events & Entertainment",
+      roles: ["Event Staff", "Promoters", "Venue Assistants"],
+      icon: "🎪",
+      count: "500+ jobs",
+    }
   ];
 
+  const displayedJobs = showAll ? localJobs : localJobs.slice(0, 6);
+
   return (
-    <section className="py-12 md:py-20 px-4 sm:px-6 md:px-16 lg:px-24 relative font-sans">
+    <section className="py-12 md:py-20 px-4 sm:px-6 md:px-16 lg:px-24 relative font-sans scroll-mt-24">
       {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-900 to-black blur-3xl"></div>
+      <div ref={sectionRef} className="absolute inset-0 bg-gradient-to-b from-black via-slate-900 to-black blur-3xl"></div>
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Heading */}
@@ -60,7 +117,7 @@ const JobCategoriesSection = () => {
 
         {/* Job Cards - Responsive Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-          {localJobs.map((job, index) => (
+          {displayedJobs.map((job, index) => (
             <div key={index} className="group relative">
               {/* Gradient Background Hover Effect */}
               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
@@ -98,6 +155,19 @@ const JobCategoriesSection = () => {
             </div>
           ))}
         </div>
+
+        {/* Show More Button */}
+        {localJobs.length > 6 && (
+          <div className="mt-12 text-center">
+            <button
+              onClick={handleToggle}
+              className="group inline-flex items-center gap-2 px-6 py-3 text-sm md:text-base font-semibold text-white bg-gradient-to-r from-cyan-500 to-violet-500 rounded-full hover:opacity-90 transition-all duration-300"
+            >
+              {showAll ? "Show Less" : "Show More Jobs"}
+              <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showAll ? "rotate-180" : ""}`} />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

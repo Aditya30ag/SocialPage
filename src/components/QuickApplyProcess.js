@@ -90,7 +90,7 @@ const QuickApplyProcess = () => {
                 <div className="text-2xl sm:text-3xl font-bold text-cyan-400 mb-1 sm:mb-2">
                   3,500+
                 </div>
-                <div className="text-xs sm:text-sm text-slate-400">Jobs Filled Today</div>
+                <div className="text-xs sm:text-sm text-slate-400">Jobs Filled This Month</div>
               </div>
               <div>
                 <div className="text-2xl sm:text-3xl font-bold text-violet-400 mb-1 sm:mb-2">

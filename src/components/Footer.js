@@ -57,8 +57,8 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between text-sm text-slate-500 text-center md:text-left">
           <div className="mb-3 md:mb-0">© 2024 Hirecentive. All rights reserved.</div>
           <div className="space-x-4">
-            <a href="/" className="hover:text-cyan-400 transition-colors">Privacy Policy</a>
-            <a href="/" className="hover:text-cyan-400 transition-colors">Terms of Service</a>
+            <a href="/privacypolicy" className="hover:text-cyan-400 transition-colors">Privacy Policy</a>
+            <a href="/tos" className="hover:text-cyan-400 transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

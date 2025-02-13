@@ -5,6 +5,8 @@ import JobCategoriesSection from './components/JobCategorySection';
 import LocalStatsSection from './components/LocalStatsSection';
 import SuccessStoriesSection from './components/SuccessStoriesSection';
 import QuickApplyProcess from './components/QuickApplyProcess';
+import PrivacyPolicy from './components/Privacypolicy';
+import TermsAndConditions from './components/Termsandservices';
 
 
 function App() {
@@ -16,11 +18,11 @@ function App() {
       path:"/",
       element:<><LandingPage/></>
     },{
-      path:"/Jobs",
-      element:<><JobCategoriesSection/></>
+      path:"/privacypolicy",
+      element:<><PrivacyPolicy/></>
     },{
-      path:"/LocalStats",
-      element:<><LocalStatsSection/></>
+      path:"/tos",
+      element:<><TermsAndConditions/></>
     },{
       path:"/SuccessStories",
       element:<><SuccessStoriesSection/></>

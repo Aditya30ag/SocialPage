@@ -1,0 +1,77 @@
+import React, { useState } from "react";
+import ParticleCanvas from "./ParticleCanvas";
+
+export default function TermsAndConditions() {
+        const [expandedSections, setExpandedSections] = useState({});
+    
+      const toggleSection = (id) => {
+        setExpandedSections((prev) => ({ ...prev, [id]: !prev[id] }));
+      };
+  const sections = [
+    { id: 1, title: "Introduction", content: `Welcome to Hirecentive Social, operated by Hirecentive Network Technologies LLP, a company registered in Karnataka, India (hereinafter referred to as "Company," "we," "us," or "our"). These Terms and Conditions ("Terms") govern the use of the Hirecentive Social platform ("Platform") by all users, including job seekers, influencers, recruiters, and businesses ("Users"). By accessing or using the Platform, you expressly agree to be bound by these legally binding Terms. If you do not agree to these Terms, you must immediately discontinue use of the Platform.` },
+    { id: 2, title: "Services Provided", content: `Hirecentive Social is a job-matching and influencer-based recruitment platform that enables influencers to refer job seekers using a unique referral link. Users understand and acknowledge that the Platform is solely a facilitator of job connections and does not guarantee employment. Influencers who refer candidates may receive incentives based on successful placements, subject to Hirecentive Social’s sole discretion and verification processes.` },
+    { id: 3, title: "Eligibility & Compliance", content: `Users must be at least 18 years old and legally competent to enter binding contracts under Indian law. Users agree to provide only true, complete, and accurate information at all times. Employers and recruiters must comply with all applicable employment laws and regulations in their respective jurisdictions.` },
+    { id: 4, title: "User Obligations & Prohibited Conduct", content: `Users expressly agree to refrain from posting, submitting, or endorsing any false, misleading, or fraudulent job listings. Users must not engage in spamming, phishing, data scraping, or unauthorized commercial use of the Platform.` },
+    { id: 5, title: "Payment, Incentives & Tax Liability", content: `Influencer incentives will be determined exclusively by Hirecentive Social. Payments will only be processed after successful job placements and verification by Hirecentive Social.` },
+    { id: 6, title: "Communication & Notifications", content: `Hirecentive Social will communicate via email, WhatsApp, SMS, or other digital platforms. Users must ensure that their contact details are up-to-date and acknowledge that Hirecentive Social is not liable for missed communications due to outdated or incorrect information.` },
+    { id: 7, title: "Liability, Disclaimers & Indemnification", content: `Hirecentive Social does not guarantee job placement, security, or employment outcomes. Users acknowledge that they use the Platform at their own risk.` },
+    { id: 8, title: "Account Termination & Enforcement", content: `Hirecentive Social may immediately suspend or terminate accounts violating these Terms without prior notice.` },
+    { id: 9, title: "Intellectual Property & Restrictions", content: `All trademarks, content, software, and proprietary information on the Platform exclusively belong to Hirecentive Network Technologies LLP.` },
+    { id: 10, title: "Legal Compliance & Dispute Resolution", content: `Users agree that all legal matters related to the Platform shall be governed exclusively by the laws of India.` },
+    { id: 11, title: "Policy Updates & User Acceptance", content: `Hirecentive Social reserves the unilateral right to update, modify, or replace these Terms at any time.` },
+    { id: 12, title: "Indemnification", content: `Users agree to indemnify the Company, its directors, and affiliates against all claims, losses, legal fees, or damages resulting from a breach of these Terms.` },
+    { id: 13, title: "Updates and Severability", content: `The Company may amend these Terms unilaterally. Continued use post-update constitutes acceptance.` },
+    { id: 14, title: "Grievance Officer", content: `For complaints or reporting violations, contact: Email: connect@hirecentive.com Address: Hirecentive Network Technologies LLP, Mangalore - 575004.` },
+    { id: 15, title: "Miscellaneous", content: `Force Majeure: The Company is not liable for delays or failures due to events beyond reasonable control.` }
+  ];
+
+  return (
+    <div className="min-h-screen bg-black py-24 px-6 md:px-24">
+      <ParticleCanvas />
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text mb-4">
+            Terms & Conditions
+          </h1>
+          
+        </div>
+
+        <div className="grid gap-12 lg:grid-cols-2">
+          {sections.map((section) => {
+            const isExpanded = expandedSections[section.id];
+            return (
+              <div key={section.id} className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 min-h-full"></div>
+                <div className="relative bg-black/50 backdrop-blur-lg p-6 md:p-8 rounded-lg border border-slate-800 shadow-lg min-h-full">
+                  <h2 className="text-xl font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-4">
+                    {section.title}
+                  </h2>
+                  <p
+                    className={`text-slate-300 whitespace-pre-line leading-relaxed transition-all duration-300 ${
+                      isExpanded ? "line-clamp-none" : "line-clamp-4"
+                    }`}
+                  >
+                    {section.content}
+                  </p>
+                  <button
+                    className="mt-4 text-cyan-400 hover:text-cyan-300 transition-colors"
+                    onClick={() => toggleSection(section.id)}
+                  >
+                    {isExpanded ? "Read Less" : "Read More"}
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-12 text-center text-slate-400">
+          <p>For any inquiries, contact us at:</p>
+          <a href="mailto:connect@hirecentive.com" className="text-cyan-400 hover:text-cyan-300 transition-colors">
+            connect@hirecentive.com
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
