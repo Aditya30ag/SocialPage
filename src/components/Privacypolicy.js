@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { Search } from "lucide-react";
 import ParticleCanvas from "./ParticleCanvas";
 
-export default function PrivacyPolicy() {
-    const [expandedSections, setExpandedSections] = useState({});
+const PrivacyPolicy = () => {
+  const [expandedSections, setExpandedSections] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
 
   const toggleSection = (id) => {
     setExpandedSections((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -131,36 +133,61 @@ export default function PrivacyPolicy() {
     },
   ];
 
+  const filteredSections = sections.filter(
+    (section) =>
+      section.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      section.content.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="min-h-screen bg-black py-24 px-6 md:px-16 lg:px-32 relative">
-      <ParticleCanvas />
-      <div className="mt-12 relative px-4 md:px-0">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text mb-4">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black py-14 px-6 md:px-16 lg:px-32">
+      <ParticleCanvas/>
+      <div className="relative px-4 md:px-0">
+        {/* Header */}
+        <section className="text-center mb-16 min-h-full">
+          <h1 className="text-4xl md:text-5xl font-bold p-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text inline-block leading-tight">
             Privacy Policy
           </h1>
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto my-4">
+            Your privacy is important to us. Read how we protect your data.
+          </p>
+        </section>
+
+        {/* Search Bar */}
+        <div className="mb-12">
+          <div className="relative max-w-xl mx-auto">
+            <input
+              type="text"
+              placeholder="Search privacy policy..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-4 py-3 pl-10 rounded-lg bg-gray-800/50 backdrop-blur-lg border border-gray-700 focus:ring-2 focus:ring-cyan-400 outline-none text-white placeholder-gray-400"
+            />
+            <Search className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
+          </div>
         </div>
 
-        <div className="grid gap-12 lg:grid-cols-2">
-          {sections.map((section) => {
+        {/* Content Grid */}
+        <div className="grid gap-8 lg:grid-cols-2">
+          {filteredSections.map((section) => {
             const isExpanded = expandedSections[section.id];
             return (
-              <div key={section.id} className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 min-h-full"></div>
-                <div className="relative bg-black/50 backdrop-blur-lg p-6 md:p-8 rounded-lg border border-slate-800 shadow-lg min-h-full">
+              <div key={section.id} className="group relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
+                <div className="relative bg-black/50 backdrop-blur-lg p-6 md:p-8 rounded-lg border border-gray-800 shadow-lg min-h-full">
                   <h2 className="text-xl font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-4">
                     {section.title}
                   </h2>
                   <p
-                    className={`text-slate-300 whitespace-pre-line leading-relaxed transition-all duration-300 ${
+                    className={`text-gray-300 whitespace-pre-line leading-relaxed transition-all duration-300 ${
                       isExpanded ? "line-clamp-none" : "line-clamp-4"
                     }`}
                   >
                     {section.content}
                   </p>
                   <button
-                    className="mt-4 text-cyan-400 hover:text-cyan-300 transition-colors"
                     onClick={() => toggleSection(section.id)}
+                    className="mt-4 text-cyan-400 hover:text-cyan-300 transition-colors"
                   >
                     {isExpanded ? "Read Less" : "Read More"}
                   </button>
@@ -170,11 +197,14 @@ export default function PrivacyPolicy() {
           })}
         </div>
 
-        <div className="mt-16 text-center text-slate-400">
-          <p className="text-lg">For any privacy-related inquiries, contact us at:</p>
+        {/* Footer */}
+        <div className="mt-16 text-center">
+          <p className="text-lg text-gray-400">
+            For any privacy-related inquiries, contact us at:
+          </p>
           <a
             href="mailto:connect@hirecentive.com"
-            className="text-cyan-400 hover:text-cyan-300 transition-colors text-lg"
+            className="text-cyan-400 hover:text-cyan-300 transition-colors text-lg block mt-2"
           >
             connect@hirecentive.com
           </a>
@@ -182,4 +212,6 @@ export default function PrivacyPolicy() {
       </div>
     </div>
   );
-}
+};
+
+export default PrivacyPolicy;

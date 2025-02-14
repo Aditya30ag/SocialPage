@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import ParticleCanvas from "./ParticleCanvas";
+import React, { useState } from 'react';
+import { Search } from 'lucide-react';
+import ParticleCanvas from './ParticleCanvas';
 
-export default function TermsAndConditions() {
-        const [expandedSections, setExpandedSections] = useState({});
-    
-      const toggleSection = (id) => {
-        setExpandedSections((prev) => ({ ...prev, [id]: !prev[id] }));
-      };
+const TermsAndConditions = () => {
+  const [expandedSections, setExpandedSections] = useState({});
+  const [searchTerm, setSearchTerm] = useState('');
+
   const sections = [
     { id: 1, title: "Introduction", content: `Welcome to Hirecentive Social, operated by Hirecentive Network Technologies LLP, a company registered in Karnataka, India (hereinafter referred to as "Company," "we," "us," or "our"). These Terms and Conditions ("Terms") govern the use of the Hirecentive Social platform ("Platform") by all users, including job seekers, influencers, recruiters, and businesses ("Users"). By accessing or using the Platform, you expressly agree to be bound by these legally binding Terms. If you do not agree to these Terms, you must immediately discontinue use of the Platform.` },
-    { id: 2, title: "Services Provided", content: `Hirecentive Social is a job-matching and influencer-based recruitment platform that enables influencers to refer job seekers using a unique referral link. Users understand and acknowledge that the Platform is solely a facilitator of job connections and does not guarantee employment. Influencers who refer candidates may receive incentives based on successful placements, subject to Hirecentive Social’s sole discretion and verification processes.` },
+    { id: 2, title: "Services Provided", content: `Hirecentive Social is a job-matching and influencer-based recruitment platform that enables influencers to refer job seekers using a unique referral link. Users understand and acknowledge that the Platform is solely a facilitator of job connections and does not guarantee employment. Influencers who refer candidates may receive incentives based on successful placements, subject to Hirecentive Social's sole discretion and verification processes.` },
     { id: 3, title: "Eligibility & Compliance", content: `Users must be at least 18 years old and legally competent to enter binding contracts under Indian law. Users agree to provide only true, complete, and accurate information at all times. Employers and recruiters must comply with all applicable employment laws and regulations in their respective jurisdictions.` },
     { id: 4, title: "User Obligations & Prohibited Conduct", content: `Users expressly agree to refrain from posting, submitting, or endorsing any false, misleading, or fraudulent job listings. Users must not engage in spamming, phishing, data scraping, or unauthorized commercial use of the Platform.` },
     { id: 5, title: "Payment, Incentives & Tax Liability", content: `Influencer incentives will be determined exclusively by Hirecentive Social. Payments will only be processed after successful job placements and verification by Hirecentive Social.` },
@@ -25,39 +24,64 @@ export default function TermsAndConditions() {
     { id: 15, title: "Miscellaneous", content: `Force Majeure: The Company is not liable for delays or failures due to events beyond reasonable control.` }
   ];
 
+  const toggleSection = (id) => {
+    setExpandedSections(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const filteredSections = sections.filter(section => 
+    section.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    section.content.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="min-h-screen bg-black py-24 px-6 md:px-24">
-      <ParticleCanvas />
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text mb-4">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black py-14 px-6 md:px-16 lg:px-32">
+      <ParticleCanvas/>
+      <div className="relative px-4 md:px-0">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold p-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text mb-4">
             Terms & Conditions
           </h1>
-          
+          <p className="text-lg text-gray-300">
+            Please read these terms carefully before using our platform
+          </p>
         </div>
 
-        <div className="grid gap-12 lg:grid-cols-2">
-          {sections.map((section) => {
+        {/* Search Bar */}
+        <div className="mb-12">
+          <div className="relative max-w-xl mx-auto">
+            <input
+              type="text"
+              placeholder="Search terms and conditions..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-4 py-3 pl-10 rounded-lg bg-gray-800/50 backdrop-blur-lg border border-gray-700 focus:ring-2 focus:ring-cyan-400 outline-none text-white placeholder-gray-400"
+            />
+            <Search className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
+          </div>
+        </div>
+
+        {/* Content Grid */}
+        <div className="grid gap-8 lg:grid-cols-2">
+          {filteredSections.map((section) => {
             const isExpanded = expandedSections[section.id];
             return (
-              <div key={section.id} className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 min-h-full"></div>
-                <div className="relative bg-black/50 backdrop-blur-lg p-6 md:p-8 rounded-lg border border-slate-800 shadow-lg min-h-full">
+              <div key={section.id} className="group relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
+                <div className="relative bg-black/50 backdrop-blur-lg p-6 md:p-8 rounded-lg border border-gray-800 shadow-lg min-h-full">
                   <h2 className="text-xl font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-4">
                     {section.title}
                   </h2>
-                  <p
-                    className={`text-slate-300 whitespace-pre-line leading-relaxed transition-all duration-300 ${
-                      isExpanded ? "line-clamp-none" : "line-clamp-4"
-                    }`}
-                  >
+                  <p className={`text-gray-300 whitespace-pre-line leading-relaxed transition-all duration-300 ${
+                    isExpanded ? 'line-clamp-none' : 'line-clamp-4'
+                  }`}>
                     {section.content}
                   </p>
                   <button
-                    className="mt-4 text-cyan-400 hover:text-cyan-300 transition-colors"
                     onClick={() => toggleSection(section.id)}
+                    className="mt-4 text-cyan-400 hover:text-cyan-300 transition-colors"
                   >
-                    {isExpanded ? "Read Less" : "Read More"}
+                    {isExpanded ? 'Read Less' : 'Read More'}
                   </button>
                 </div>
               </div>
@@ -65,13 +89,21 @@ export default function TermsAndConditions() {
           })}
         </div>
 
-        <div className="mt-12 text-center text-slate-400">
-          <p>For any inquiries, contact us at:</p>
-          <a href="mailto:connect@hirecentive.com" className="text-cyan-400 hover:text-cyan-300 transition-colors">
+        {/* Footer */}
+        <div className="mt-16 text-center">
+          <p className="text-lg text-gray-400">
+            For any inquiries, contact us at:
+          </p>
+          <a
+            href="mailto:connect@hirecentive.com"
+            className="text-cyan-400 hover:text-cyan-300 transition-colors text-lg block mt-2"
+          >
             connect@hirecentive.com
           </a>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default TermsAndConditions;
