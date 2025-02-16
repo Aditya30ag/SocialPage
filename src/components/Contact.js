@@ -77,7 +77,7 @@ export default function Contact() {
 
   return (
     <>
-      <section className="py-24 md:py-32 px-6 md:px-24 relative" id="contact-us">
+      <section className="h-full py-12 md:py-12 px-6 md:px-24 relative" id="contact-us">
         {/* Background Gradient Blur */}
         <div className="absolute inset-0 bg-gradient-to-r from-violet-600/20 to-cyan-400/20 blur-3xl"></div>
 
@@ -178,7 +178,7 @@ export default function Contact() {
                     className="form-checkbox h-5 w-5 mt-1 text-cyan-400 rounded border-slate-600 focus:ring-cyan-400/50"
                   />
                   <span className="text-slate-300 text-sm">
-                    I agree to the <a href="#" className="text-cyan-400 hover:underline">Privacy Policy</a> and consent to having my personal data processed for the stated purposes.
+                  I agree to the Privacy Policy and consent to having my personal data processed for the stated purposes.
                   </span>
                 </label>
               </div>

@@ -144,7 +144,7 @@ const LandingPage = () => {
             <div key={index} className="group relative h-full">
               {/* Consistent hover glow effect */}
               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-              <div className="relative h-full bg-black/80 rounded-xl p-6 sm:p-8 md:p-10 border border-slate-800 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between group-hover:scale-[1.03] group-hover:shadow-lg group-hover:shadow-cyan-500/20">
+              <div className="relative h-full bg-black/80 rounded-xl p-6 sm:p-8 md:p-10 border border-slate-800 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between group-hover:scale-[1.03] group-hover:shadow-lg group-hover:shadow-cyan-500">
                 <div>
                   <div className="text-4xl sm:text-5xl mb-4 sm:mb-6 transform transition-transform group-hover:scale-110">
                     {step.icon}
@@ -253,7 +253,7 @@ const LandingPage = () => {
 
 
       {/* Trust Badges */}
-      <section className="py-12 relative">
+      <section className="relative">
         <div className="max-w-4xl mx-auto px-6 md:px-24 ">
           <div className="flex justify-center space-x-8">
             {trustBadges.map((badge, index) => (

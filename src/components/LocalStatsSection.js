@@ -123,7 +123,7 @@ const LocalStatsSection = () => {
               key={index}
               className="relative p-5 rounded-2xl border border-slate-800 bg-black/50 backdrop-blur-lg shadow-lg flex flex-col items-center text-center group transition-transform duration-300 hover:scale-105"
             >
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-20 group-hover:opacity-50 transition duration-300"></div>
               <stat.icon className="w-10 h-10 text-cyan-400 mb-3" />
               <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-1">
                 {stat.value}
