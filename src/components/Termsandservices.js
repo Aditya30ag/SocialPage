@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 import ParticleCanvas from './ParticleCanvas';
+import Footer from './Footer';
+import {Link} from "react-router-dom";
 
 const TermsAndConditions = () => {
   const [expandedSections, setExpandedSections] = useState({});
@@ -34,19 +36,36 @@ const TermsAndConditions = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black py-14 px-6 md:px-16 lg:px-32">
+    <div>
+    <div className="min-h-screen bg-black py-8 sm:py-14 px-4 sm:px-6 md:px-16 lg:px-32">
       <ParticleCanvas/>
       <div className="relative px-4 md:px-0">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold p-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text mb-4">
+        
+        <section className="text-center mb-10 sm:mb-16 min-h-full">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold p-2 sm:p-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text leading-tight">
+              Hirecentive
+            </h1>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold p-2 sm:p-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text inline-block leading-tight">
             Terms & Conditions
-          </h1>
-          <p className="text-lg text-gray-300">
+            </h1>
+            <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto my-2 sm:my-4 px-2">
             Please read these terms carefully before using our platform
-          </p>
+            </p>
+          </section>
+        <div className="fixed top-8 left-8 z-50 animate-fade-in">
+          <Link to="/">
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
+            <div className="relative w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center bg-black rounded-full border border-slate-800 overflow-hidden group-hover:scale-110 transition-transform duration-300">
+              {/* Replace with your actual logo or initial */}
+              
+              {/* Uncomment and use this for an actual image logo */}
+              <img src="/9e8806_f802bd961b9a4c20995641de0ba09cf0~mv2.png" alt="Hirecentive Logo" className="w-full h-full object-cover" />
+            </div>
+          </div>
+          </Link>
         </div>
-
         {/* Search Bar */}
         <div className="mb-12">
           <div className="relative max-w-xl mx-auto">
@@ -62,7 +81,8 @@ const TermsAndConditions = () => {
         </div>
 
         {/* Content Grid */}
-        <div className="grid gap-8 lg:grid-cols-2">
+        <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
+                <div className="relative bg-black/50 backdrop-blur-lg p-6 md:p-8 rounded-lg border border-gray-800 shadow-lg min-h-full">
           {filteredSections.map((section) => {
             const isExpanded = expandedSections[section.id];
             return (
@@ -102,6 +122,8 @@ const TermsAndConditions = () => {
           </a>
         </div>
       </div>
+    </div>
+    <Footer/>
     </div>
   );
 };

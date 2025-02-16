@@ -11,11 +11,12 @@ const JobCategoriesSection = () => {
       // Scroll with offset and smooth behavior
       const yOffset = -20; // Adjust this value based on your header height
       const element = sectionRef.current;
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      
+      const y =
+        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
       window.scrollTo({
         top: y,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   };
@@ -93,7 +94,7 @@ const JobCategoriesSection = () => {
       roles: ["Event Staff", "Promoters", "Venue Assistants"],
       icon: "🎪",
       count: "500+ jobs",
-    }
+    },
   ];
 
   const displayedJobs = showAll ? localJobs : localJobs.slice(0, 6);
@@ -101,7 +102,10 @@ const JobCategoriesSection = () => {
   return (
     <section className="py-12 md:py-20 px-4 sm:px-6 md:px-16 lg:px-24 relative font-sans scroll-mt-24">
       {/* Background Gradient */}
-      <div ref={sectionRef} className="absolute inset-0 bg-gradient-to-b from-black via-slate-900 to-black blur-3xl"></div>
+      <div
+        ref={sectionRef}
+        className="absolute inset-0 bg-gradient-to-b from-black via-slate-900 to-black blur-3xl"
+      ></div>
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Heading */}
@@ -159,13 +163,17 @@ const JobCategoriesSection = () => {
         {/* Show More Button */}
         {localJobs.length > 6 && (
           <div className="mt-12 text-center">
-            <button
-              onClick={handleToggle}
-              className="group inline-flex items-center gap-2 px-6 py-3 text-sm md:text-base font-semibold text-white bg-gradient-to-r from-cyan-500 to-violet-500 rounded-full hover:opacity-90 transition-all duration-300"
-            >
-              {showAll ? "Show Less" : "Show More Jobs"}
-              <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showAll ? "rotate-180" : ""}`} />
-            </button>
+            
+            <div className="text-center">
+              <button className="group relative px-6 py-3 rounded-lg text-sm font-bold transition-all duration-300 hover:scale-105" onClick={handleToggle}>
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg opacity-75"></div>
+                <div className="absolute inset-0.5 bg-black rounded-lg"></div>
+                <span className="relative flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
+                  {showAll ? "Show Less" : "Show More Jobs"}
+                  <ChevronDown className="w-4 h-4 text-cyan-400 animate-bounce" />
+                </span>
+              </button>
+            </div>
           </div>
         )}
       </div>

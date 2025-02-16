@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Building2, Users, Heart, Star, TrendingUp, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import ParticleCanvas from './ParticleCanvas';
+import {Link} from "react-router-dom";
 
 const IntroAnimation = () => {
     const [currentScene, setCurrentScene] = useState(0);
@@ -134,7 +135,19 @@ const IntroAnimation = () => {
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-violet-600 via-transparent to-transparent animate-pulse"></div>
           <div className="absolute bottom-0 right-0 w-full h-full bg-gradient-to-tl from-cyan-400 via-transparent to-transparent animate-pulse"></div>
         </div>
-        
+        <div className="fixed top-8 left-8 z-50 animate-fade-in">
+          <Link to="/">
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
+            <div className="relative w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center bg-black rounded-full border border-slate-800 overflow-hidden group-hover:scale-110 transition-transform duration-300">
+              {/* Replace with your actual logo or initial */}
+              
+              {/* Uncomment and use this for an actual image logo */}
+              <img src="/9e8806_f802bd961b9a4c20995641de0ba09cf0~mv2.png" alt="Hirecentive Logo" className="w-full h-full object-cover" />
+            </div>
+          </div>
+          </Link>
+        </div>
         <div className="relative min-h-screen flex items-center justify-center p-4 sm:p-6">
           {/* Navigation Arrows */}
           <button 

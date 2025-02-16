@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Search } from "lucide-react";
 import ParticleCanvas from "./ParticleCanvas";
+import Footer from "./Footer";
+import { Link } from "react-router-dom";
 
 const PrivacyPolicy = () => {
   const [expandedSections, setExpandedSections] = useState({});
@@ -9,6 +11,7 @@ const PrivacyPolicy = () => {
   const toggleSection = (id) => {
     setExpandedSections((prev) => ({ ...prev, [id]: !prev[id] }));
   };
+
   const sections = [
     {
       id: 1,
@@ -140,35 +143,57 @@ const PrivacyPolicy = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black py-14 px-6 md:px-16 lg:px-32">
-      <ParticleCanvas/>
-      <div className="relative px-4 md:px-0">
-        {/* Header */}
-        <section className="text-center mb-16 min-h-full">
-          <h1 className="text-4xl md:text-5xl font-bold p-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text inline-block leading-tight">
-            Privacy Policy
-          </h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto my-4">
-            Your privacy is important to us. Read how we protect your data.
-          </p>
-        </section>
+    <div>
+      <div className="min-h-screen bg-black py-8 sm:py-14 px-4 sm:px-6 md:px-16 lg:px-32">
+        <ParticleCanvas />
+        
+        <div className="relative px-2 sm:px-4 md:px-0">
+          {/* Header */}
+          <section className="text-center mb-10 sm:mb-16 min-h-full">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold p-2 sm:p-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text leading-tight">
+              Hirecentive
+            </h1>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold p-2 sm:p-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text inline-block leading-tight">
+              Privacy Policy
+            </h1>
+            <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto my-2 sm:my-4 px-2">
+              Your privacy is important to us. Read how we protect your data.
+            </p>
+          </section>
 
-        {/* Search Bar */}
-        <div className="mb-12">
-          <div className="relative max-w-xl mx-auto">
-            <input
-              type="text"
-              placeholder="Search privacy policy..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-3 pl-10 rounded-lg bg-gray-800/50 backdrop-blur-lg border border-gray-700 focus:ring-2 focus:ring-cyan-400 outline-none text-white placeholder-gray-400"
-            />
-            <Search className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
+          {/* Home button - fixed position with responsive sizing */}
+          <div className="fixed top-4 sm:top-8 left-4 sm:left-8 z-50 animate-fade-in inline-block">
+            <Link to="/">
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
+                <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 flex items-center justify-center bg-black rounded-full border border-slate-800 overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                  <img
+                    src="/9e8806_f802bd961b9a4c20995641de0ba09cf0~mv2.png"
+                    alt="Hirecentive Logo"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </Link>
           </div>
-        </div>
 
-        {/* Content Grid */}
-        <div className="grid gap-8 lg:grid-cols-2">
+          {/* Search Bar - more compact on mobile */}
+          <div className="mb-8 sm:mb-12">
+            <div className="relative max-w-xl mx-auto">
+              <input
+                type="text"
+                placeholder="Search privacy policy..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 pl-8 sm:pl-10 rounded-lg bg-gray-800/50 backdrop-blur-lg border border-gray-700 focus:ring-2 focus:ring-cyan-400 outline-none text-white placeholder-gray-400 text-sm sm:text-base"
+              />
+              <Search className="absolute left-2 sm:left-3 top-2.5 sm:top-3.5 h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
+            </div>
+          </div>
+
+          {/* Content sections with responsive spacing and font sizes */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
+                <div className="relative bg-black/50 backdrop-blur-lg p-6 md:p-8 rounded-lg border border-gray-800 shadow-lg min-h-full">
           {filteredSections.map((section) => {
             const isExpanded = expandedSections[section.id];
             return (
@@ -178,18 +203,16 @@ const PrivacyPolicy = () => {
                   <h2 className="text-xl font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-4">
                     {section.title}
                   </h2>
-                  <p
-                    className={`text-gray-300 whitespace-pre-line leading-relaxed transition-all duration-300 ${
-                      isExpanded ? "line-clamp-none" : "line-clamp-4"
-                    }`}
-                  >
+                  <p className={`text-gray-300 whitespace-pre-line leading-relaxed transition-all duration-300 ${
+                    isExpanded ? 'line-clamp-none' : 'line-clamp-4'
+                  }`}>
                     {section.content}
                   </p>
                   <button
                     onClick={() => toggleSection(section.id)}
                     className="mt-4 text-cyan-400 hover:text-cyan-300 transition-colors"
                   >
-                    {isExpanded ? "Read Less" : "Read More"}
+                    {isExpanded ? 'Read Less' : 'Read More'}
                   </button>
                 </div>
               </div>
@@ -197,19 +220,21 @@ const PrivacyPolicy = () => {
           })}
         </div>
 
-        {/* Footer */}
-        <div className="mt-16 text-center">
-          <p className="text-lg text-gray-400">
-            For any privacy-related inquiries, contact us at:
-          </p>
-          <a
-            href="mailto:connect@hirecentive.com"
-            className="text-cyan-400 hover:text-cyan-300 transition-colors text-lg block mt-2"
-          >
-            connect@hirecentive.com
-          </a>
+          {/* Footer - responsive text size */}
+          <div className="mt-10 sm:mt-16 text-center">
+            <p className="text-base sm:text-lg text-gray-400">
+              For any privacy-related inquiries, contact us at:
+            </p>
+            <a
+              href="mailto:connect@hirecentive.com"
+              className="text-cyan-400 hover:text-cyan-300 transition-colors text-base sm:text-lg block mt-1 sm:mt-2"
+            >
+              connect@hirecentive.com
+            </a>
+          </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
