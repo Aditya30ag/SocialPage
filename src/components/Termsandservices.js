@@ -132,7 +132,7 @@ const TermsAndConditions = () => {
             </Link>
           </div>
           {/* Search Bar */}
-          <div className="mb-12 sm:mb-16 relative z-50">
+          <div className="mb-8 sm:mb-8 relative z-50">
             <div className="relative max-w-xl mx-auto">
               <input
                 type="text"
