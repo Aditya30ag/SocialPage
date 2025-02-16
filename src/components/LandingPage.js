@@ -34,28 +34,28 @@ const LandingPage = () => {
     {
       name: "Sahil Khan",
       role: "Tech Influencer",
-      image: "/api/placeholder/64/64",
+      image: "/image1.png",
       quote:
         "Earned ₹20,000 in a month by helping 15 local drivers find work through Hirecentive Social.",
-      earnings: "$35,000",
+      earnings: "₹35,000",
       platform: "Instagram",
     },
     {
       name: "Rohan Iyer",
       role: "LinkedIn Thought Leader",
-      image: "/api/placeholder/64/64",
+      image: "/image2.png",
       quote:
         "Assisted 20 local artisans in selling online, making ₹25,000 while supporting small businesses",
-      earnings: "$25,000",
+      earnings: "₹25,000",
       platform: "LinkedIn",
     },
     {
       name: "Priya Sharma",
       role: "Career Coach",
-      image: "/api/placeholder/64/64",
+      image: "/image3.png",
       quote:
         "Connected 10 job seekers to retail jobs and grew her influence while earning ₹10,000 in rewards",
-      earnings: "$42,000",
+      earnings: "₹42,000",
       platform: "Twitter",
     },
   ];
