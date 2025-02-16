@@ -146,7 +146,7 @@ const PrivacyPolicy = () => {
     <div>
       <div className="min-h-screen bg-black py-8 sm:py-14 px-4 sm:px-6 md:px-16 lg:px-32">
         <ParticleCanvas />
-        
+
         <div className="relative px-2 sm:px-4 md:px-0">
           {/* Header */}
           <section className="text-center mb-10 sm:mb-16 min-h-full">
@@ -178,47 +178,50 @@ const PrivacyPolicy = () => {
           </div>
 
           {/* Search Bar - more compact on mobile */}
-          <div className="mb-8 sm:mb-12">
+          <div className="mb-12 sm:mb-16 relative z-50">
             <div className="relative max-w-xl mx-auto">
               <input
                 type="text"
                 placeholder="Search privacy policy..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-3 sm:px-4 py-2 sm:py-3 pl-8 sm:pl-10 rounded-lg bg-gray-800/50 backdrop-blur-lg border border-gray-700 focus:ring-2 focus:ring-cyan-400 outline-none text-white placeholder-gray-400 text-sm sm:text-base"
+                className="w-full px-4 py-3 pl-10 rounded-lg bg-gray-800/50 border border-gray-700 
+      focus:ring-2 focus:ring-cyan-400 outline-none text-white placeholder-gray-400"
               />
-              <Search className="absolute left-2 sm:left-3 top-2.5 sm:top-3.5 h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
+              <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
             </div>
           </div>
 
           {/* Content sections with responsive spacing and font sizes */}
           <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
-                <div className="relative bg-black/50 backdrop-blur-lg p-6 md:p-8 rounded-lg border border-gray-800 shadow-lg min-h-full">
-          {filteredSections.map((section) => {
-            const isExpanded = expandedSections[section.id];
-            return (
-              <div key={section.id} className="group relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
-                <div className="relative bg-black/50 backdrop-blur-lg p-6 md:p-8 rounded-lg border border-gray-800 shadow-lg min-h-full">
-                  <h2 className="text-xl font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-4">
-                    {section.title}
-                  </h2>
-                  <p className={`text-gray-300 whitespace-pre-line leading-relaxed transition-all duration-300 ${
-                    isExpanded ? 'line-clamp-none' : 'line-clamp-4'
-                  }`}>
-                    {section.content}
-                  </p>
-                  <button
-                    onClick={() => toggleSection(section.id)}
-                    className="mt-4 text-cyan-400 hover:text-cyan-300 transition-colors"
-                  >
-                    {isExpanded ? 'Read Less' : 'Read More'}
-                  </button>
+          <div className="relative bg-black/50 backdrop-blur-lg p-6 md:p-8 rounded-lg border border-gray-800 shadow-lg min-h-full">
+            {filteredSections.map((section) => {
+              const isExpanded = expandedSections[section.id];
+              return (
+                <div key={section.id} className="group relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
+                  <div className="relative bg-black/50 backdrop-blur-lg p-6 md:p-8 rounded-lg border border-gray-800 shadow-lg min-h-full">
+                    <h2 className="text-xl font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-4">
+                      {section.title}
+                    </h2>
+                    <p
+                      className={`text-gray-300 whitespace-pre-line leading-relaxed transition-all duration-300 ${
+                        isExpanded ? "line-clamp-none" : "line-clamp-4"
+                      }`}
+                    >
+                      {section.content}
+                    </p>
+                    <button
+                      onClick={() => toggleSection(section.id)}
+                      className="mt-4 text-cyan-400 hover:text-cyan-300 transition-colors"
+                    >
+                      {isExpanded ? "Read Less" : "Read More"}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
 
           {/* Footer - responsive text size */}
           <div className="mt-10 sm:mt-16 text-center">
