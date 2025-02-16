@@ -17,7 +17,7 @@ const TermsAndConditions = () => {
     {
       id: 2,
       title: "Services Provided",
-      content: `Hirecentive Social is a job-matching and influencer-based recruitment platform that enables influencers to refer job seekers using a unique referral link. Users understand and acknowledge that the Platform is solely a facilitator of job connections and does not guarantee employment. Influencers who refer candidates may receive incentives based on successful placements, subject to Hirecentive Social's sole discretion and verification processes.`,
+      content: `Hirecentive Social is a job-matching and influencer-based recruitment platform that enables influencers to refer job seekers using a unique referral link. Users understand and acknowledge that the Platform is solely a facilitator of job connections and does not guarantee employment. Influencers who refer candidates may receive incentives based on successful placements, subject to Hirecentive Social’s sole discretion and verification processes.`,
     },
     {
       id: 3,
@@ -37,7 +37,7 @@ const TermsAndConditions = () => {
     {
       id: 6,
       title: "Communication & Notifications",
-      content: `Hirecentive Social will communicate via email, WhatsApp, SMS, or other digital platforms. Users must ensure that their contact details are up-to-date and acknowledge that Hirecentive Social is not liable for missed communications due to outdated or incorrect information.`,
+      content: `Hirecentive Social will send notifications and important updates through email and WhatsApp. The mode of communication may be subject to change, and users will receive prior notice before any modifications take effect. Users must ensure that their contact details are accurate and up to date to avoid missing critical information.`,
     },
     {
       id: 7,
@@ -83,6 +83,18 @@ const TermsAndConditions = () => {
       id: 15,
       title: "Miscellaneous",
       content: `Force Majeure: The Company is not liable for delays or failures due to events beyond reasonable control.`,
+    },
+    {
+      id: 15,
+      title: "NO GUARANTEE OF EMPLOYMENT",
+      content: `Hirecentive Social does not and cannot guarantee that every candidate using the platform will secure a job. While we strive to provide the best possible job opportunities by leveraging AI-driven job matching and recruiter networks, employment decisions remain solely at the discretion of hiring companies. Users are encouraged to actively engage in job applications and networking to enhance their chances of securing employment.
+`,
+    },
+    {
+      id: 15,
+      title: " BACKGROUND CHECKS & USER HONEST",
+      content: `Hirecentive Social expects all users to provide honest and accurate information regarding their profiles, job experience, and any other credentials submitted. While Hirecentive may conduct background checks at its discretion, we do not guarantee the verification of every user or employer on the platform. Employers are responsible for conducting their own due diligence before hiring any candidate. Any misrepresentation by users may lead to account suspension or legal action.
+`,
     },
   ];
 
