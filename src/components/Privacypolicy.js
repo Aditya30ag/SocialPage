@@ -149,14 +149,14 @@ const PrivacyPolicy = () => {
 
         <div className="relative px-2 sm:px-4 md:px-0">
           {/* Header */}
-          <section className="text-center mb-10 sm:mb-16 min-h-full">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold p-2 sm:p-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text leading-tight">
+          <section className="text-center mb-8 sm:mb-8 min-h-full px-4">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold p-2 sm:p-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text leading-snug">
               Hirecentive
             </h1>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold p-2 sm:p-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text inline-block leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold p-2 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text leading-snug">
               Privacy Policy
-            </h1>
-            <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto my-2 sm:my-4 px-2">
+            </h2>
+            <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto mt-4 sm:mt-6 px-4 leading-relaxed">
               Your privacy is important to us. Read how we protect your data.
             </p>
           </section>
