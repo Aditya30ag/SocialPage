@@ -159,7 +159,7 @@ const PrivacyPolicy = () => {
 
   return (
     <div className="relative">
-      <div className="min-h-screen bg-gradient-to-b from-black via-slate-900/100 to-black py-4 sm:py-8 md:py-14 px-3 sm:px-6 md:px-12 lg:px-24">
+      <div className="min-h-full bg-gradient-to-b from-black via-slate-900/100 to-black py-4 sm:py-8 md:py-14 px-3 sm:px-6 md:px-12 lg:px-24">
         {/* Background */}
         <ParticleCanvas />
 
@@ -167,10 +167,10 @@ const PrivacyPolicy = () => {
           {/* Header */}
           
           <header className="text-center mb-12">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
             Hirecentive
             </h1>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
+            <h2 className="text-2xl p-4 sm:text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
             Privacy Policy
             </h2>
             <p className="text-sm sm:text-base text-gray-300 max-w-2xl mx-auto">
@@ -218,7 +218,7 @@ const PrivacyPolicy = () => {
 
           {/* Main Content */}
           <main className="relative px-2 sm:px-4">
-            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25"></div>
+            
             <div className="relative bg-black/50 backdrop-blur-lg p-3 sm:p-4 rounded-lg border border-gray-800 shadow-lg">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                 {filteredSections.map((section) => {

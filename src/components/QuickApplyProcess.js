@@ -36,7 +36,7 @@ const QuickApplyProcess = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24 relative min-h-screen" id="how-it-works">
+    <section className="py-10 md:py-14 relative min-h-full" id="how-it-works">
       <ParticleCanvas />
       <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-900 to-black z-0"></div>
 

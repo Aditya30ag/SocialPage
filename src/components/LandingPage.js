@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { ChevronDown, ExternalLink } from "lucide-react";
 import Footer from "./Footer";
 import {
   DollarSign,
@@ -15,7 +14,7 @@ import LocalStatsSection from "./LocalStatsSection";
 // import SuccessStoriesSection from "./SuccessStoriesSection";
 import QuickApplyProcess from "./QuickApplyProcess";
 import Contact from "./Contact";
-import ParticleCanvas from "./ParticleCanvas";
+// import ParticleCanvas from "./ParticleCanvas";
 import IntroAnimation from "./IntroAnimation ";
 import FAQSection from "./Faq";
 
@@ -170,10 +169,10 @@ const LandingPage = () => {
 
       <LocalStatsSection />
       {/* Testimonials Section */}
-      <section className="py-24 relative font-inter">
+      <section className="py-14 relative font-inter">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-900 to-black blur-2xl"></div>
         <div className="max-w-6xl mx-auto px-6 md:px-24 relative">
-          <h2 className="relative text-4xl md:text-6xl font-bold text-center mb-24 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
+          <h2 className="relative text-4xl md:text-6xl p-4 font-bold text-center mb-24 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
             Real Stories, Real Impact
           </h2>
           <div className="grid md:grid-cols-3 gap-8 items-stretch">
