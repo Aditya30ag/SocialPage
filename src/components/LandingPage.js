@@ -62,7 +62,7 @@ const LandingPage = () => {
 
   const trustBadges = [
     { icon: Shield, label: "256-bit Encryption" },
-    { icon: Clock, label: "48h Payment Guarantee" },
+    { icon: Clock, label: "48h Payment Guarantee *" },
     { icon: Wallet, label: "Secure Transactions" },
   ];
 
@@ -92,9 +92,9 @@ const LandingPage = () => {
     "Slack",
     "Zoom",
   ];
-
+  
   return (
-    <div className="min-h-screen bg-black text-slate-50 font-sans overflow-hidden">
+    <div className="min-h-screen bg-black text-slate-50 font-sans overflow-hidden" id="home">
      
       <IntroAnimation/>
 
@@ -129,13 +129,13 @@ const LandingPage = () => {
               icon: "🔗",
             },
             {
-              title: "Help to Build Connections",
+              title: "Help Build Connections",
               description:
                 "Help job seekers connect with local employers looking for their skills.",
               icon: "📱",
             },
             {
-              title: "Get Incentives!",
+              title: "Earn Incentives!",
               description:
                 "Get paid for every successful hire through your link. No limits on earning potential!",
               icon: "💸",
@@ -161,7 +161,8 @@ const LandingPage = () => {
           ))}
         </div>
         <div className="mt-12 sm:mt-16">
-          <p className="relative text-lg sm:text-2xl md:text-3xl font-light text-center text-slate-400 max-w-4xl mx-auto leading-relaxed">
+          
+          <p className="relative text-center text-lg md:text-2xl font-bold text-gray-400 mt-20 max-w-2xl mx-auto leading-relaxed">
           Every connection you create not only makes an impact but also rewards you with incentives while making a difference.
           </p>
         </div>

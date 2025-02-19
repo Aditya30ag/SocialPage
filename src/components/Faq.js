@@ -5,54 +5,87 @@ const FAQSection = () => {
   // Sample FAQ data - replace with your actual FAQs
   const faqs = [
     {
-      q: "How do earnings work?",
-      a: "You earn a commission for every successful job placement through your referral link. Payments are processed directly to your bank account within 48 hours of placement confirmation.",
+      q: "What is Hirecentive Social?",
+      a: "Hirecentive Social is a platform designed for influencers to monetize their reach effortlessly. By sharing a unique link with their audience, influencers help job seekers find local opportunities while earning commissions on successful referrals.",
     },
     {
-      q: "What kinds of jobs can I share?",
-      a: "We focus on entry-level and mid-level positions across various industries including tech, sales, marketing, operations, and customer service.",
+      q: "How do I sign up as an influencer?",
+      a: "Simply visit Hirecentive Social’s landing page, fill out the form, and submit your details. Once verified, you’ll receive access to your dashboard and unique referral link.",
     },
     {
-      q: "Is there any cost to join?",
-      a: "No, it's completely free to join and share opportunities. You only earn, never pay.",
+      q: "Is there any fee to join Hirecentive Social?",
+      a: "No, joining Hirecentive Social is completely free. We don’t charge influencers anything to participate.",
     },
     {
-      q: "How do I track my referrals?",
-      a: "You get access to a personalized dashboard where you can track all referrals, applications, and earnings in real-time.",
+      q: "How does Hirecentive Social work for influencers?",
+      a: "1. Sign up and get verified.\n2. Receive your unique referral link.\n3. Share it on your social platforms (bio, stories, reels, posts, etc.).\n4. Job seekers apply through your link.\n5. Earn commissions for every successful referral.",
     },
     {
-      q: "What are the payment methods?",
-      a: "We support multiple payment methods including direct bank transfer, PayPal, and cryptocurrency transfers for international influencers.",
+      q: "How do I earn money with Hirecentive Social?",
+      a: "Whenever a job seeker registers and gets hired through your link, you earn a commission. Your dashboard tracks clicks, sign-ups, and earnings in real time.",
     },
     {
-      q: "How much can I earn per referral?",
-      a: "Earnings vary based on the position and company, typically ranging from $500 to $5000 per successful placement.",
+      q: "What kind of job seekers should I target?",
+      a: "Anyone actively looking for a job! This includes freshers, experienced professionals, gig workers, freelancers, and those seeking local job opportunities.",
     },
     {
-      q: "Can I refer international candidates?",
-      a: "Yes, we accept international referrals. Many of our partner companies offer visa sponsorship for exceptional candidates.",
+      q: "Do I have to create custom content for Hirecentive?",
+      a: "No! You can integrate Hirecentive naturally into your existing content. We provide engaging story templates and reel ending clips to increase interaction, but there’s no compulsion to use them.",
     },
     {
-      q: "What happens after I refer someone?",
-      a: "You'll receive real-time updates on your dashboard about their application status, interviews, and eventual placement.",
+      q: "Can I share my link on multiple platforms?",
+      a: "Yes! You can share your referral link on Instagram, YouTube, Twitter, LinkedIn, Telegram, and even WhatsApp groups—wherever your audience is most active.",
     },
     {
-      q: "How long does the hiring process take?",
-      a: "The process typically takes 2-4 weeks, though this can vary depending on the position and company requirements.",
+      q: "How do I track my performance and earnings?",
+      a: "Your dashboard provides real-time insights into the number of clicks, sign-ups, and commissions earned from your referrals.",
     },
     {
-      q: "Are there any referral limits?",
-      a: "No limits! You can refer as many qualified candidates as you want and earn for each successful placement.",
+      q: "When and how do I get paid?",
+      a: "Payouts are processed weekly or monthly (depending on the volume) via bank transfer or UPI. You’ll need to provide your payment details in your dashboard.",
     },
     {
-      q: "What information do I need to refer someone?",
-      a: "Basic details like name, email, and their preferred job categories. Candidates will complete their full profiles later.",
+      q: "Is there a limit to how much I can earn?",
+      a: "No! Your earnings depend entirely on your reach and engagement. The more job seekers sign up and get hired through your link, the more you earn.",
     },
     {
-      q: "Do you offer support for influencers?",
-      a: "Yes, you get a dedicated success manager and access to our influencer community for tips and best practices.",
+      q: "What if a job seeker applies but doesn’t get hired?",
+      a: "You earn a commission only when a referral gets hired, but their details remain in our system for future opportunities. The more relevant leads you generate, the higher your chances of earning.",
+    },
+    {
+      q: "How does Hirecentive verify influencers?",
+      a: "We manually review influencer applications based on factors like audience size, engagement, and platform authenticity before granting access.",
+    },
+    {
+      q: "What types of jobs are available for job seekers?",
+      a: "Hirecentive provides opportunities across multiple industries, including tech, operations, customer support, sales, and gig-based roles. We use Google Location API to match people with hyperlocal jobs.",
+    },
+    {
+      q: "Can I promote Hirecentive Social if I’m a micro-influencer?",
+      a: "Absolutely! Even if you have a smaller audience, high engagement and trust can drive great results.",
+    },
+    {
+      q: "Can I customize my referral link?",
+      a: "Not currently, but you can shorten it using bit.ly or other link shorteners to make it more shareable.",
+    },
+    {
+      q: "What happens if I stop promoting Hirecentive Social?",
+      a: "There’s no obligation to continue, and you can start or stop at any time. However, the more consistently you share, the higher your potential earnings.",
+    },
+    {
+      q: "Can I collaborate with Hirecentive for exclusive influencer partnerships?",
+      a: "Yes! We are open to deeper collaborations, including brand partnerships, content campaigns, and exclusive incentives for top-performing influencers.",
+    },
+    {
+      q: "Will I get any support or content guidance from Hirecentive?",
+      a: "Yes, we provide ready-to-use templates, marketing insights, and growth strategies to help maximize your earnings.",
+    },
+    {
+      q: "Where can I reach out for more questions or support?",
+      a: "You can contact us via WhatsApp, email, or through the support section in your dashboard.",
     },
   ];
+  
 
   // State for tracking which FAQs are visible
   const [isVisible, setIsVisible] = useState({});

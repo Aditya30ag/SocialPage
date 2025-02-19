@@ -10,27 +10,27 @@ import ParticleCanvas from "./ParticleCanvas";
 const QuickApplyProcess = () => {
   const steps = [
     {
-      icon: Phone,
-      title: "Share Your Number",
-      description: "Just enter your phone number - no lengthy forms needed",
+      icon: MessageSquare,
+      title: "Share Your Details",
+      description: "Just enter your details - no lengthy forms needed",
       color: "from-cyan-400 to-cyan-500",
     },
     {
       icon: MapPin,
       title: "Select Location",
-      description: "Choose your preferred work location within your city",
+      description: "Choose your work location around your city",
       color: "from-violet-400 to-violet-500",
     },
     {
-      icon: MessageSquare,
-      title: "Quick Chat",
-      description: "Brief chat with employer in your language",
+      icon: Phone,
+      title: "Interview with employer",
+      description: "Interview with employer with language you know",
       color: "from-purple-400 to-purple-500",
     },
     {
       icon: Calendar,
       title: "Start Working",
-      description: "Begin your new job within 24-48 hours",
+      description: "Begin your new job within 24-48 hours *",
       color: "from-amber-400 to-amber-500",
     },
   ];
@@ -47,8 +47,8 @@ const QuickApplyProcess = () => {
         </h2>
 
         {/* Subtitle */}
-        <p className="text-base sm:text-lg md:text-xl text-slate-400 text-center mb-8 sm:mb-12 max-w-3xl mx-auto">
-          No complex forms. No long waiting. Start working within 48 hours.
+        <p className="text-center text-lg md:text-2xl font-bold text-gray-400 mt-10 max-w-2xl mx-auto mb-12">
+        No complex forms. No long waiting. Start getting matched within 48 hours.*
         </p>
 
         {/* Steps Section - Responsive Grid */}

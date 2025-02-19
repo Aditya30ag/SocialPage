@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Search } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Search, ChevronUp } from "lucide-react";
 import ParticleCanvas from "./ParticleCanvas";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
@@ -7,6 +7,21 @@ import { Link } from "react-router-dom";
 const PrivacyPolicy = () => {
   const [expandedSections, setExpandedSections] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // Scroll to top button visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 500);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const toggleSection = (id) => {
     setExpandedSections((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -143,101 +158,137 @@ const PrivacyPolicy = () => {
   );
 
   return (
-    <div>
-      <div className="min-h-screen bg-black py-8 sm:py-14 px-4 sm:px-6 md:px-16 lg:px-32">
+    <div className="relative">
+      <div className="min-h-screen bg-gradient-to-b from-black via-slate-900/100 to-black py-4 sm:py-8 md:py-14 px-3 sm:px-6 md:px-12 lg:px-24">
+        {/* Background */}
         <ParticleCanvas />
 
-        <div className="relative px-2 sm:px-4 md:px-0">
+        <div className="relative">
           {/* Header */}
-          <section className="text-center mb-8 sm:mb-8 min-h-full px-4">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold p-2 sm:p-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text leading-snug">
-              Hirecentive
+          
+          <header className="text-center mb-12">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
+            Hirecentive
             </h1>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold p-2 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text leading-snug">
-              Privacy Policy
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
+            Privacy Policy
             </h2>
-            <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto mt-4 sm:mt-6 px-4 leading-relaxed">
-              Your privacy is important to us. Read how we protect your data.
+            <p className="text-sm sm:text-base text-gray-300 max-w-2xl mx-auto">
+            Your privacy is important to us. Read how we protect your data.
             </p>
-          </section>
+          </header>
 
-          {/* Home button - fixed position with responsive sizing */}
-          <div className="fixed top-4 sm:top-8 left-4 sm:left-8 z-50 animate-fade-in inline-block">
-            <Link to="/">
+          {/* Navigation Logo */}
+          <nav className="fixed top-3 sm:top-4 md:top-6 left-3 sm:left-4 md:left-6 z-50 animate-fade-in">
+            <div className="fixed top-4 left-4 sm:top-8 sm:left-8 z-50">
+                        <Link to="/" className="block">
+                          <div className="relative group">
+                            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
+                            <div className="relative w-10 h-10 sm:w-16 sm:h-16 flex items-center justify-center bg-black rounded-full border border-slate-800 overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                              <img
+                                src="/9e8806_f802bd961b9a4c20995641de0ba09cf0~mv2.png"
+                                alt="Hirecentive Logo"
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                          </div>
+                        </Link>
+                      </div>
+          </nav>
+
+          {/* Search Bar */}
+          <section className="mb-6 sm:mb-8 relative z-10">
+            <div className="relative max-w-xl mx-auto px-2 sm:px-4">
               <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
-                <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 flex items-center justify-center bg-black rounded-full border border-slate-800 overflow-hidden group-hover:scale-110 transition-transform duration-300">
-                  <img
-                    src="/9e8806_f802bd961b9a4c20995641de0ba09cf0~mv2.png"
-                    alt="Hirecentive Logo"
-                    className="w-full h-full object-cover"
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Search privacy policy..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full px-4 py-2 sm:py-3 pl-10 rounded-lg bg-black/60 border border-gray-700 
+                    focus:ring-2 focus:ring-cyan-400 outline-none text-white placeholder-gray-400 text-sm sm:text-base"
                   />
+                  <Search className="absolute left-3 top-2.5 sm:top-3 h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
                 </div>
               </div>
-            </Link>
-          </div>
-
-          {/* Search Bar - more compact on mobile */}
-          <div className="mb-8 sm:mb-8 relative z-50">
-            <div className="relative max-w-xl mx-auto">
-              <input
-                type="text"
-                placeholder="Search privacy policy..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-3 pl-10 rounded-lg bg-gray-800/50 border border-gray-700 
-      focus:ring-2 focus:ring-cyan-400 outline-none text-white placeholder-gray-400"
-              />
-              <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
             </div>
-          </div>
+          </section>
 
-          {/* Content sections with responsive spacing and font sizes */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
-          <div className="relative bg-black/50 backdrop-blur-lg p-6 md:p-8 rounded-lg border border-gray-800 shadow-lg min-h-full">
-            {filteredSections.map((section) => {
-              const isExpanded = expandedSections[section.id];
-              return (
-                <div key={section.id} className="group relative">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
-                  <div className="relative bg-black/50 backdrop-blur-lg p-6 md:p-8 rounded-lg border border-gray-800 shadow-lg min-h-full">
-                    <h2 className="text-xl font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-4">
-                      {section.title}
-                    </h2>
-                    <p
-                      className={`text-gray-300 whitespace-pre-line leading-relaxed transition-all duration-300 ${
-                        isExpanded ? "line-clamp-none" : "line-clamp-4"
-                      }`}
-                    >
-                      {section.content}
-                    </p>
-                    <button
-                      onClick={() => toggleSection(section.id)}
-                      className="mt-4 text-cyan-400 hover:text-cyan-300 transition-colors"
-                    >
-                      {isExpanded ? "Read Less" : "Read More"}
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          {/* Main Content */}
+          <main className="relative px-2 sm:px-4">
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25"></div>
+            <div className="relative bg-black/50 backdrop-blur-lg p-3 sm:p-4 rounded-lg border border-gray-800 shadow-lg">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                {filteredSections.map((section) => {
+                  const isExpanded = expandedSections[section.id];
+                  return (
+                    <article key={section.id} className="group relative">
+                      <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
+                      <div className="relative bg-black/50 backdrop-blur-lg p-4 sm:p-6 rounded-lg border border-gray-800 shadow-lg h-full flex flex-col">
+                        <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-3 sm:mb-4">
+                          {section.title}
+                        </h3>
+                        <p
+                          className={`text-gray-300 text-sm sm:text-base whitespace-pre-line leading-relaxed transition-all duration-300 flex-grow ${
+                            isExpanded ? "line-clamp-none" : "line-clamp-3 sm:line-clamp-4"
+                          }`}
+                        >
+                          {section.content}
+                        </p>
+                        <button
+                          onClick={() => toggleSection(section.id)}
+                          className="mt-3 sm:mt-4 text-cyan-400 hover:text-cyan-300 transition-colors self-start text-sm sm:text-base"
+                        >
+                          {isExpanded ? "Read Less" : "Read More"}
+                        </button>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+          </main>
 
-          {/* Footer - responsive text size */}
-          <div className="mt-10 sm:mt-16 text-center">
-            <p className="text-base sm:text-lg text-gray-400">
+          {/* Contact Section */}
+          <section className="mt-8 sm:mt-12 md:mt-16 text-center px-2 sm:px-4">
+            <p className="text-sm sm:text-base text-gray-400">
               For any privacy-related inquiries, contact us at:
             </p>
             <a
               href="mailto:connect@hirecentive.com"
-              className="text-cyan-400 hover:text-cyan-300 transition-colors text-base sm:text-lg block mt-1 sm:mt-2"
+              className="text-cyan-400 hover:text-cyan-300 transition-colors text-sm sm:text-base block mt-1 sm:mt-2"
             >
               connect@hirecentive.com
             </a>
-          </div>
+          </section>
         </div>
       </div>
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 z-50 p-2 rounded-full bg-black/80 border border-gray-700 hover:border-cyan-400 transition-colors group"
+        >
+          <ChevronUp className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300" />
+        </button>
+      )}
+
       <Footer />
+
+      {/* Animations */}
+      <style>{`
+        @keyframes fade-in {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        .animate-fade-in {
+          animation: fade-in 0.5s ease-out;
+        }
+      `}</style>
     </div>
   );
 };

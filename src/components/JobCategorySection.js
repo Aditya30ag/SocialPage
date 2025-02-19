@@ -110,14 +110,14 @@ const JobCategoriesSection = () => {
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Heading */}
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8 md:mb-12 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
-          Local Jobs Near You
+          Help To Find Local Jobs Near You
         </h2>
 
         {/* Subtitle */}
-        <p className="text-lg sm:text-xl text-slate-400 text-center mb-8 md:mb-12 max-w-3xl mx-auto font-light leading-relaxed">
-          Find opportunities in your neighborhood. No complex requirements,
+        <p className="text-center text-lg md:text-2xl font-bold text-gray-400 mt-10 max-w-2xl mx-auto mb-12">
+          Connect your followers to find opportunities in your neighborhood. No complex requirements,
           start working within 48 hours.
-        </p>
+*        </p>
 
         {/* Job Cards - Responsive Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">

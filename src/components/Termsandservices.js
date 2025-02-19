@@ -109,31 +109,18 @@ const TermsAndConditions = () => {
   );
 
   return (
-    <div>
-      <div className="min-h-screen bg-black py-8 sm:py-14 px-4 sm:px-6 md:px-16 lg:px-32">
+    <div className="min-h-screen bg-gradient-to-b from-black via-slate-900/100 to-black">
+      <div className="relative min-h-full w-full">
         <ParticleCanvas />
-        <div className="relative px-4 md:px-0">
-          {/* Header */}
-
-          <section className="text-center mb-8 sm:mb-8 min-h-full">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold p-2 sm:p-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text leading-snug">
-              Hirecentive
-            </h1>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold p-2 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text leading-snug">
-              Terms & Conditions
-            </h2>
-            <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto my-2 sm:my-4 px-2">
-              Please read these terms carefully before using our platform
-            </p>
-          </section>
-          <div className="fixed top-8 left-8 z-50 animate-fade-in">
-            <Link to="/">
+        
+        {/* Main Content Container */}
+        <div className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pt-16 pb-20">
+          {/* Home Link */}
+          <div className="fixed top-4 left-4 sm:top-8 sm:left-8 z-50">
+            <Link to="/" className="block">
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
-                <div className="relative w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center bg-black rounded-full border border-slate-800 overflow-hidden group-hover:scale-110 transition-transform duration-300">
-                  {/* Replace with your actual logo or initial */}
-
-                  {/* Uncomment and use this for an actual image logo */}
+                <div className="relative w-10 h-10 sm:w-16 sm:h-16 flex items-center justify-center bg-black rounded-full border border-slate-800 overflow-hidden group-hover:scale-110 transition-transform duration-300">
                   <img
                     src="/9e8806_f802bd961b9a4c20995641de0ba09cf0~mv2.png"
                     alt="Hirecentive Logo"
@@ -143,60 +130,77 @@ const TermsAndConditions = () => {
               </div>
             </Link>
           </div>
+
+          {/* Header Section */}
+          <header className="text-center mb-12">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
+              Hirecentive
+            </h1>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
+              Terms & Conditions
+            </h2>
+            <p className="text-sm sm:text-base text-gray-300 max-w-2xl mx-auto">
+              Please read these terms carefully before using our platform
+            </p>
+          </header>
+
           {/* Search Bar */}
-          <div className="mb-8 sm:mb-8 relative z-50">
-            <div className="relative max-w-xl mx-auto">
+          <div className="max-w-xl mx-auto mb-12 px-4">
+            <div className="relative">
               <input
                 type="text"
-                placeholder="Search privacy policy..."
+                placeholder="Search terms..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-3 pl-10 rounded-lg bg-gray-800/50 border border-gray-700 
-              focus:ring-2 focus:ring-cyan-400 outline-none text-white placeholder-gray-400"
+                className="w-full px-4 py-3 pl-12 rounded-lg bg-gray-800/50 border border-gray-700 
+                focus:ring-2 focus:ring-cyan-400 outline-none text-white placeholder-gray-400
+                text-sm sm:text-base transition-all duration-200"
               />
-              <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
             </div>
           </div>
 
           {/* Content Grid */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
-          <div className="relative bg-black/50 backdrop-blur-lg p-6 md:p-8 rounded-lg border border-gray-800 shadow-lg min-h-full">
-            {filteredSections.map((section) => {
-              const isExpanded = expandedSections[section.id];
-              return (
-                <div key={section.id} className="group relative">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
-                  <div className="relative bg-black/50 backdrop-blur-lg p-6 md:p-8 rounded-lg border border-gray-800 shadow-lg min-h-full">
-                    <h2 className="text-xl font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-4">
-                      {section.title}
-                    </h2>
-                    <p
-                      className={`text-gray-300 whitespace-pre-line leading-relaxed transition-all duration-300 ${
-                        isExpanded ? "line-clamp-none" : "line-clamp-4"
-                      }`}
-                    >
-                      {section.content}
-                    </p>
-                    <button
-                      onClick={() => toggleSection(section.id)}
-                      className="mt-4 text-cyan-400 hover:text-cyan-300 transition-colors"
-                    >
-                      {isExpanded ? "Read Less" : "Read More"}
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <main className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25"></div>
+            <div className="relative bg-black/50 backdrop-blur-lg p-4 sm:p-6 rounded-lg border border-gray-800 shadow-lg">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                {filteredSections.map((section) => (
+                  <article key={section.id} className="group relative">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
+                    <div className="relative bg-black/50 backdrop-blur-lg p-4 sm:p-6 rounded-lg border border-gray-800 shadow-lg h-full flex flex-col">
+                      <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-3">
+                        {section.title}
+                      </h3>
+                      <p className={`text-sm sm:text-base text-gray-300 whitespace-pre-line leading-relaxed flex-grow
+                        ${expandedSections[section.id] ? "line-clamp-none" : "line-clamp-3 sm:line-clamp-4"}`}>
+                        {section.content}
+                      </p>
+                      <button
+                        onClick={() => toggleSection(section.id)}
+                        className="mt-4 text-sm sm:text-base text-cyan-400 hover:text-cyan-300 transition-colors self-start
+                        focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black
+                        rounded px-2 py-1"
+                      >
+                        {expandedSections[section.id] ? "Read Less" : "Read More"}
+                      </button>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </main>
 
-          {/* Footer */}
-          <div className="mt-16 text-center">
-            <p className="text-lg text-gray-400">
+          {/* Contact Section */}
+          <div className="mt-12 sm:mt-16 text-center">
+            <p className="text-base sm:text-lg text-gray-400">
               For any inquiries, contact us at:
             </p>
             <a
               href="mailto:connect@hirecentive.com"
-              className="text-cyan-400 hover:text-cyan-300 transition-colors text-lg block mt-2"
+              className="text-cyan-400 hover:text-cyan-300 transition-colors text-base sm:text-lg inline-block mt-2
+              focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black
+              rounded px-2 py-1"
             >
               connect@hirecentive.com
             </a>

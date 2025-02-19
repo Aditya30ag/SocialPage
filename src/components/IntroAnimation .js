@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Building2, Users, Heart, Star, TrendingUp, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
+import { Building2, Users, Heart, Star, TrendingUp, ExternalLink, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import ParticleCanvas from './ParticleCanvas';
 import {Link} from "react-router-dom";
 
@@ -33,6 +33,12 @@ const IntroAnimation = () => {
       setCurrentScene((prev) => (prev + 1) % scenes.length);
     };
 
+    const scrollToSection = (id) => {
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    };
 
   
     const scenes = [
@@ -54,7 +60,7 @@ const IntroAnimation = () => {
         content: (
           <div className="text-center px-4 animate-slide-up">
             <h1 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text leading-tight mb-4 sm:mb-6 animate-gradient-x">
-              Your Influence
+              Your Influence,
               <br />
               Their Future
             </h1>
@@ -65,12 +71,12 @@ const IntroAnimation = () => {
         content: (
           <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16 max-w-6xl mx-auto px-4 animate-slide-up">
             <div className="text-center md:text-left transform hover:scale-105 transition-transform duration-300 flex items-center justify-center flex-col">
-              <Building2 className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 text-violet-500 mb-4 sm:mb-6 mx-auto md:mx-0 animate-float" />
+              <Building2 className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 text-violet-500 mb-4 sm:mb-6 mx-auto md:mx-0 " />
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">Local Businesses</h2>
               <p className="text-lg sm:text-xl lg:text-2xl text-slate-300">Struggling to find reliable employees</p>
             </div>
             <div className="text-center md:text-left transform hover:scale-105 transition-transform duration-300 flex items-center justify-center flex-col">
-              <Users className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 text-cyan-400 mb-4 sm:mb-6 mx-auto md:mx-0 animate-float" />
+              <Users className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 text-cyan-400 mb-4 sm:mb-6 mx-auto md:mx-0 " />
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">Your Followers</h2>
               <p className="text-lg sm:text-xl lg:text-2xl text-slate-300">Looking for job opportunities</p>
             </div>
@@ -85,7 +91,7 @@ const IntroAnimation = () => {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10">
               {[
-                { icon: Heart, color: "text-cyan-400", label: "Make Impact" },
+                { icon: Heart, color: "text-cyan-400", label: "Make an Impact" },
                 { icon: Star, color: "text-violet-500", label: "Build Trust" },
                 { icon: TrendingUp, color: "text-amber-400", label: "Earn More" }
               ].map((item, index) => (
@@ -96,7 +102,7 @@ const IntroAnimation = () => {
                   <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-xl blur opacity-25 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
                   <div className="relative bg-black/40 backdrop-blur-xl p-6 sm:p-8 rounded-xl border border-slate-800">
                     <div className="flex flex-col items-center">
-                      <item.icon className={`w-12 h-12 sm:w-16 sm:h-16 ${item.color} mb-4 sm:mb-6 animate-float`} />
+                      <item.icon className={`w-12 h-12 sm:w-16 sm:h-16 ${item.color} mb-4 sm:mb-6 `} />
                       <span className="text-lg sm:text-xl lg:text-2xl text-slate-200 font-medium">{item.label}</span>
                     </div>
                   </div>
@@ -113,12 +119,12 @@ const IntroAnimation = () => {
               <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-8 sm:mb-10 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text animate-gradient-x">
                 Join the Movement
               </h2>
-              <button className="group relative px-8 sm:px-10 py-4 sm:py-5 rounded-xl text-xl sm:text-2xl lg:text-3xl font-bold transition-all duration-300 hover:scale-110 animate-pulse">
+              <button className="group relative px-8 sm:px-10 py-4 sm:py-5 rounded-xl text-xl sm:text-2xl lg:text-3xl font-bold transition-all duration-300 hover:scale-110 animate-pulse" onClick={() => scrollToSection("contact-us")}>
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400"></div>
                 <div className="absolute inset-0.5 bg-black rounded-xl"></div>
                 <span className="relative z-10 flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
                   Get Your Unique Link
-                  <ExternalLink className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400 transition-transform group-hover:translate-x-2" />
+                  <ExternalLink className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400  group-hover:translate-x-2" />
                 </span>
               </button>
             </div>
@@ -126,7 +132,17 @@ const IntroAnimation = () => {
         )
       }
     ];
-  
+    
+
+    // Function to scroll down to content below the intro animation
+    const scrollToContent = () => {
+      // This will scroll to the next section that comes after the intro animation
+      // You can adjust this to target a specific element ID
+      window.scrollBy({
+        top: window.innerHeight,
+        behavior: 'smooth'
+      });
+    };
     return (
       <div className="relative min-h-screen bg-black text-white overflow-hidden">
         <ParticleCanvas />
@@ -136,8 +152,8 @@ const IntroAnimation = () => {
           <div className="absolute bottom-0 right-0 w-full h-full bg-gradient-to-tl from-cyan-400 via-transparent to-transparent animate-pulse"></div>
         </div>
         <div className="fixed top-8 left-8 z-50 animate-fade-in">
-          <Link to="/">
-          <div className="relative group">
+          <Link to="/" onClick={() => scrollToSection("home")}>
+          <div className="relative group" >
             <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
             <div className="relative w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center bg-black rounded-full border border-slate-800 overflow-hidden group-hover:scale-110 transition-transform duration-300">
               {/* Replace with your actual logo or initial */}
@@ -188,7 +204,17 @@ const IntroAnimation = () => {
             />
           ))}
         </div>
-
+        <div 
+          onClick={scrollToContent}
+          className="absolute bottom-14 sm:bottom-16 right-6 sm:right-20 cursor-pointer z-30 animate-bounce-slow flex flex-col items-center justify-center group"
+        >
+          <span className="text-xs sm:text-sm text-slate-300 opacity-80 mb-1 group-hover:text-cyan-400 transition-colors duration-300 text-center">
+            Scroll for more
+          </span>
+          <div className="p-2 rounded-full bg-black/30 backdrop-blur-sm border border-slate-700 group-hover:bg-black/50 transition-all duration-300 flex items-center justify-center">
+            <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-cyan-400 transition-colors duration-300" />
+          </div>
+        </div>
         <style>{`
           @keyframes slide-right-enter {
             0% { opacity: 0; transform: translateX(50px); }
@@ -218,10 +244,6 @@ const IntroAnimation = () => {
           .animate-slide-left-exit {
             animation: slide-left-exit 0.5s ease-out forwards;
           }
-          @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-          }
           @keyframes gradient-x {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -231,7 +253,7 @@ const IntroAnimation = () => {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
           }
-          .animate-float {
+          . {
             animation: float 3s ease-in-out infinite;
           }
           .animate-gradient-x {
