@@ -209,7 +209,7 @@ const IntroAnimation = () => {
           className="absolute bottom-14 sm:bottom-16 right-6 sm:right-20 cursor-pointer z-30 animate-bounce-slow flex flex-col items-center justify-center group"
         >
           <span className="text-xs sm:text-sm text-slate-300 opacity-80 mb-1 group-hover:text-cyan-400 transition-colors duration-300 text-center">
-            Scroll for more
+            Scroll
           </span>
           <div className="p-2 rounded-full bg-black/30 backdrop-blur-sm border border-slate-700 group-hover:bg-black/50 transition-all duration-300 flex items-center justify-center">
             <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-cyan-400 transition-colors duration-300" />

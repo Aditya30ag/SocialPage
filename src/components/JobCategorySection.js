@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
 
 const JobCategoriesSection = () => {
   const [showAll, setShowAll] = useState(false);
@@ -7,18 +7,18 @@ const JobCategoriesSection = () => {
 
   const handleToggle = () => {
     setShowAll(!showAll);
-    if (showAll) {
-      // Scroll with offset and smooth behavior
-      const yOffset = -20; // Adjust this value based on your header height
-      const element = sectionRef.current;
-      const y =
-        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    // if (showAll) {
+    //   // Scroll with offset and smooth behavior
+    //   const yOffset = -20; // Adjust this value based on your header height
+    //   const element = sectionRef.current;
+    //   const y =
+    //     element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
-      window.scrollTo({
-        top: y,
-        behavior: "smooth",
-      });
-    }
+    //   window.scrollTo({
+    //     top: y,
+    //     behavior: "smooth",
+    //   });
+    // }
   };
 
   const localJobs = [
@@ -170,7 +170,7 @@ const JobCategoriesSection = () => {
                 <div className="absolute inset-0.5 bg-black rounded-lg"></div>
                 <span className="relative flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
                   {showAll ? "Show Less" : "Show More Jobs"}
-                  <ChevronDown className="w-4 h-4 text-cyan-400 animate-bounce" />
+                  {showAll ? <ChevronUp className="w-4 h-4 text-cyan-400 animate-bounce" />:<ChevronDown className="w-4 h-4 text-cyan-400 animate-bounce" />}
                 </span>
               </button>
             </div>
