@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Search, ChevronUp } from "lucide-react";
 import ParticleCanvas from "./ParticleCanvas";
 import Footer from "./Footer";
@@ -6,26 +6,68 @@ import { Link } from "react-router-dom";
 
 const PrivacyPolicy = () => {
   const [expandedSections, setExpandedSections] = useState({});
-  const [searchTerm, setSearchTerm] = useState("");
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const contentRefs = useRef({});
+  const [overflowSections, setOverflowSections] = useState({});
 
-  // Scroll to top button visibility
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 500);
     };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  // Improved overflow detection
+  useEffect(() => {
+    const checkOverflow = () => {
+      const newOverflowSections = {};
+      Object.keys(contentRefs.current).forEach((id) => {
+        const element = contentRefs.current[id];
+        if (element) {
+          // Create a temporary clone to measure full height
+          const clone = element.cloneNode(true);
+          clone.style.position = 'absolute';
+          clone.style.visibility = 'hidden';
+          clone.style.height = 'auto';
+          clone.style.maxHeight = 'none';
+          clone.style.lineClamp = 'none';
+          clone.style.webkitLineClamp = 'none';
+          document.body.appendChild(clone);
+          
+          const fullHeight = clone.offsetHeight;
+          document.body.removeChild(clone);
+          
+          // Get the height of 4 lines (approximate)
+          const lineHeight = parseInt(window.getComputedStyle(element).lineHeight);
+          const clampedHeight = lineHeight * 4;
+          
+          newOverflowSections[id] = fullHeight > clampedHeight;
+        }
+      });
+      setOverflowSections(newOverflowSections);
+    };
+
+    // Initial check
+    checkOverflow();
+    
+    // Check on window resize
+    window.addEventListener("resize", checkOverflow);
+    
+    // Check when search term changes (filtered content might change)
+    const timeoutId = setTimeout(checkOverflow, 100);
+    
+    return () => {
+      window.removeEventListener("resize", checkOverflow);
+      clearTimeout(timeoutId);
+    };
+  }, [searchTerm]);
 
   const toggleSection = (id) => {
     setExpandedSections((prev) => ({ ...prev, [id]: !prev[id] }));
   };
+
 
   const sections = [
     {
@@ -160,13 +202,9 @@ const PrivacyPolicy = () => {
   return (
     <div className="relative">
       <div className="min-h-full bg-gradient-to-b from-black via-slate-900/100 to-black py-4 sm:py-8 md:py-14 px-3 sm:px-6 md:px-12 lg:px-24">
-        {/* Background */}
         <ParticleCanvas />
 
-        <div className="relative">
-          {/* Header */}
-          
-          <header className="text-center mb-12">
+        <header className="text-center mb-12">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
             Hirecentive
             </h1>
@@ -178,26 +216,8 @@ const PrivacyPolicy = () => {
             </p>
           </header>
 
-          {/* Navigation Logo */}
-          <nav className="fixed top-3 sm:top-4 md:top-6 left-3 sm:left-4 md:left-6 z-50 animate-fade-in">
-            <div className="fixed top-4 left-4 sm:top-8 sm:left-8 z-50">
-                        <Link to="/" className="block">
-                          <div className="relative group">
-                            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
-                            <div className="relative w-10 h-10 sm:w-16 sm:h-16 flex items-center justify-center bg-black rounded-full border border-slate-800 overflow-hidden group-hover:scale-110 transition-transform duration-300">
-                              <img
-                                src="/9e8806_f802bd961b9a4c20995641de0ba09cf0~mv2.png"
-                                alt="Hirecentive Logo"
-                                className="w-full h-full object-cover"
-                              />
-                            </div>
-                          </div>
-                        </Link>
-                      </div>
-          </nav>
-
-          {/* Search Bar */}
-          <section className="mb-6 sm:mb-8 relative z-10">
+        {/* Search Bar */}
+        <section className="mb-6 sm:mb-8 relative z-10">
             <div className="relative max-w-xl mx-auto px-2 sm:px-4">
               <div className="relative group">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
@@ -216,79 +236,48 @@ const PrivacyPolicy = () => {
             </div>
           </section>
 
-          {/* Main Content */}
-          <main className="relative px-2 sm:px-4">
-            
-            <div className="relative bg-black/50 backdrop-blur-lg p-3 sm:p-4 rounded-lg border border-gray-800 shadow-lg">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                {filteredSections.map((section) => {
-                  const isExpanded = expandedSections[section.id];
-                  return (
-                    <article key={section.id} className="group relative">
-                      <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
-                      <div className="relative bg-black/50 backdrop-blur-lg p-4 sm:p-6 rounded-lg border border-gray-800 shadow-lg h-full flex flex-col">
-                        <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-3 sm:mb-4">
-                          {section.title}
-                        </h3>
-                        <p
-                          className={`text-gray-300 text-sm sm:text-base whitespace-pre-line leading-relaxed transition-all duration-300 flex-grow ${
-                            isExpanded ? "line-clamp-none" : "line-clamp-3 sm:line-clamp-4"
-                          }`}
-                        >
-                          {section.content}
-                        </p>
-                        <button
-                          onClick={() => toggleSection(section.id)}
-                          className="mt-3 sm:mt-4 text-cyan-400 hover:text-cyan-300 transition-colors self-start text-sm sm:text-base"
-                        >
-                          {isExpanded ? "Read Less" : "Read More"}
-                        </button>
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-            </div>
-          </main>
-
-          {/* Contact Section */}
-          <section className="mt-8 sm:mt-12 md:mt-16 text-center px-2 sm:px-4">
-            <p className="text-sm sm:text-base text-gray-400">
-              For any privacy-related inquiries, contact us at:
-            </p>
-            <a
-              href="mailto:connect@hirecentive.com"
-              className="text-cyan-400 hover:text-cyan-300 transition-colors text-sm sm:text-base block mt-1 sm:mt-2"
-            >
-              connect@hirecentive.com
-            </a>
-          </section>
+        {/* Main Content */}
+        <main className="relative px-2 sm:px-4">
+        <div className="relative bg-black/50 backdrop-blur-lg p-3 sm:p-4 rounded-lg border border-gray-800 shadow-lg">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+            {filteredSections.map((section) => {
+              const isExpanded = expandedSections[section.id];
+              return (
+                <article key={section.id} className="group relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
+                  <div className="relative bg-black/50 backdrop-blur-lg p-4 sm:p-6 rounded-lg border border-gray-800 shadow-lg h-full flex flex-col">
+                    <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-3 sm:mb-4">
+                      {section.title}
+                    </h3>
+                    <div 
+                      ref={(el) => (contentRefs.current[section.id] = el)}
+                      className={`text-gray-300 text-sm sm:text-base whitespace-pre-line leading-relaxed transition-all duration-300 flex-grow ${
+                        isExpanded ? "" : "line-clamp-4"
+                      }`}
+                    >
+                      {section.content}
+                    </div>
+                    {overflowSections[section.id] && (
+                      <button
+                        onClick={() => toggleSection(section.id)}
+                        className="mt-3 sm:mt-4 text-cyan-400 hover:text-cyan-300 transition-colors self-start text-sm sm:text-base flex items-center gap-1"
+                      >
+                        {isExpanded ? "Read Less" : "Read More"}
+                        <ChevronUp className={`w-4 h-4 transition-transform ${!isExpanded ? "rotate-180" : ""}`} />
+                      </button>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </main>
 
-      {/* Scroll to Top Button */}
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 p-2 rounded-full bg-black/80 border border-gray-700 hover:border-cyan-400 transition-colors group"
-        >
-          <ChevronUp className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300" />
-        </button>
-      )}
-
-      <Footer />
-
-      {/* Animations */}
-      <style>{`
-        @keyframes fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
         
-        .animate-fade-in {
-          animation: fade-in 0.5s ease-out;
-        }
-      `}</style>
+      </div>
+      <Footer />
+      
     </div>
   );
 };

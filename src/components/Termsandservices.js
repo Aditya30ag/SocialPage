@@ -1,13 +1,45 @@
-import React, { useState } from "react";
-import { Search } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { Search, ChevronUp } from "lucide-react";
 import ParticleCanvas from "./ParticleCanvas";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
 
 const TermsAndConditions = () => {
   const [expandedSections, setExpandedSections] = useState({});
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const contentRefs = useRef({}); // Store references to each section's content
+  const [overflowSections, setOverflowSections] = useState({});
 
+  // Scroll to top button visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 500);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const checkOverflow = () => {
+      const newOverflowSections = {};
+      Object.keys(contentRefs.current).forEach((id) => {
+        const element = contentRefs.current[id];
+        if (element) {
+          newOverflowSections[id] = element.scrollHeight > element.clientHeight;
+        }
+      });
+      setOverflowSections(newOverflowSections);
+    };
+
+    checkOverflow();
+    window.addEventListener("resize", checkOverflow);
+    return () => window.removeEventListener("resize", checkOverflow);
+  }, []);
+
+  const toggleSection = (id) => {
+    setExpandedSections((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
   const sections = [
     {
       id: 1,
@@ -98,9 +130,7 @@ const TermsAndConditions = () => {
     },
   ];
 
-  const toggleSection = (id) => {
-    setExpandedSections((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
+  
 
   const filteredSections = sections.filter(
     (section) =>
@@ -161,35 +191,42 @@ const TermsAndConditions = () => {
           </div>
 
           {/* Content Grid */}
-          <main className="relative">
-            
-            <div className="relative bg-black/50 backdrop-blur-lg p-4 sm:p-6 rounded-lg border border-gray-800 shadow-lg">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                {filteredSections.map((section) => (
-                  <article key={section.id} className="group relative">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
-                    <div className="relative bg-black/50 backdrop-blur-lg p-4 sm:p-6 rounded-lg border border-gray-800 shadow-lg h-full flex flex-col">
-                      <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-3">
-                        {section.title}
-                      </h3>
-                      <p className={`text-sm sm:text-base text-gray-300 whitespace-pre-line leading-relaxed flex-grow
-                        ${expandedSections[section.id] ? "line-clamp-none" : "line-clamp-3 sm:line-clamp-4"}`}>
-                        {section.content}
-                      </p>
-                      <button
-                        onClick={() => toggleSection(section.id)}
-                        className="mt-4 text-sm sm:text-base text-cyan-400 hover:text-cyan-300 transition-colors self-start
-                        focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black
-                        rounded px-2 py-1"
-                      >
-                        {expandedSections[section.id] ? "Read Less" : "Read More"}
-                      </button>
+          <main className="relative px-2 sm:px-4">
+                  <div className="relative bg-black/50 backdrop-blur-lg p-3 sm:p-4 rounded-lg border border-gray-800 shadow-lg">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                      {filteredSections.map((section) => {
+                        const isExpanded = expandedSections[section.id];
+                        return (
+                          <article key={section.id} className="group relative">
+                            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
+                            <div className="relative bg-black/50 backdrop-blur-lg p-4 sm:p-6 rounded-lg border border-gray-800 shadow-lg h-full flex flex-col">
+                              <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-3 sm:mb-4">
+                                {section.title}
+                              </h3>
+                              <div 
+                                ref={(el) => (contentRefs.current[section.id] = el)}
+                                className={`text-gray-300 text-sm sm:text-base whitespace-pre-line leading-relaxed transition-all duration-300 flex-grow ${
+                                  isExpanded ? "" : "line-clamp-4"
+                                }`}
+                              >
+                                {section.content}
+                              </div>
+                              {overflowSections[section.id] && (
+                                <button
+                                  onClick={() => toggleSection(section.id)}
+                                  className="mt-3 sm:mt-4 text-cyan-400 hover:text-cyan-300 transition-colors self-start text-sm sm:text-base flex items-center gap-1"
+                                >
+                                  {isExpanded ? "Read Less" : "Read More"}
+                                  <ChevronUp className={`w-4 h-4 transition-transform ${!isExpanded ? "rotate-180" : ""}`} />
+                                </button>
+                              )}
+                            </div>
+                          </article>
+                        );
+                      })}
                     </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </main>
+                  </div>
+                </main>
 
           {/* Contact Section */}
           <div className="mt-12 sm:mt-16 text-center">
