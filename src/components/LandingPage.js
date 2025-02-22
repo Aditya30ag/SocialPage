@@ -17,6 +17,7 @@ import Contact from "./Contact";
 // import ParticleCanvas from "./ParticleCanvas";
 import IntroAnimation from "./IntroAnimation ";
 import FAQSection from "./Faq";
+import Chatbot from "./Chatbot";
 
 const LandingPage = () => {
   const [isVisible, setIsVisible] = useState({});
@@ -35,7 +36,7 @@ const LandingPage = () => {
       role: "Tech Influencer",
       image: "/image1.png",
       quote:
-        "Earned ₹20,000 in a month by helping 15 local drivers find work through Hirecentive Social.",
+        "Earned ₹35,000 in a month by helping 15 local drivers find work through Hirecentive Social.",
       earnings: "₹35,000",
       platform: "Instagram",
     },
@@ -53,9 +54,9 @@ const LandingPage = () => {
       role: "Career Coach",
       image: "/image3.png",
       quote:
-        "Connected 10 job seekers to retail jobs and grew her influence while earning ₹10,000 in rewards",
+        "Connected 42 job seekers to retail jobs and grew her influence while earning ₹10,000 in rewards",
       earnings: "₹42,000",
-      platform: "Twitter",
+      platform: "Instagram",
     },
   ];
 
@@ -271,7 +272,7 @@ const LandingPage = () => {
 
       {/* Footer */}
       <Footer />
-
+            <Chatbot/>
       <style>{`
         @keyframes marquee {
           0% {

@@ -206,7 +206,7 @@ const IntroAnimation = () => {
         </div>
         <div 
           onClick={scrollToContent}
-          className="absolute bottom-14 sm:bottom-16 right-6 sm:right-20 cursor-pointer z-30 animate-bounce-slow flex flex-col items-center justify-center group"
+          className="absolute bottom-20 sm:bottom-16 right-8 sm:right-20 cursor-pointer z-30 animate-bounce-slow flex flex-col items-center justify-center group"
         >
           <span className="text-xs sm:text-sm text-slate-300 opacity-80 mb-1 group-hover:text-cyan-400 transition-colors duration-300 text-center">
             Scroll

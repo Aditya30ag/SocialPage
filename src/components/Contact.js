@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ArrowRight, X } from "lucide-react";
+import { ArrowRight, X, Plus } from "lucide-react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -10,9 +10,8 @@ export default function Contact() {
       Instagram: "",
       LinkedIn: "",
       Facebook: "",
-      Other: "",
     },
-    otherPlatformName: "",
+    otherPlatforms: [], // Array of {name: string, handle: string}
     selectedPlatforms: ["Instagram"],
     privacyAccepted: false,
   });
@@ -29,23 +28,24 @@ export default function Contact() {
   }, [showModal]);
 
   const generateConfetti = () => {
-    const pieces = [];
-    const colors = ["#00ccff", "#cc00ff", "#ffcc00", "#ff00cc", "#00ffcc"];
-
-    for (let i = 0; i < 50; i++) {
-      pieces.push({
-        id: i,
-        x: Math.random() * (window.innerWidth * 0.8),
-        y: Math.random() * (window.innerHeight * 0.8),
-        size: Math.random() * 8 + 4,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        rotation: Math.random() * 360,
-        animationDuration: Math.random() * 2 + 1.5,
-      });
-    }
-
-    setConfetti(pieces);
+    const confettiCount = 50; // Increased for more visual impact
+    const newConfetti = Array.from({ length: confettiCount }, (_, i) => ({
+      id: i,
+      x: Math.random() * window.innerWidth, // Random horizontal position
+      y: Math.random() * window.innerHeight, // Random vertical position
+      size: Math.random() * 12 + 4, // More varied sizes (4px - 16px)
+      color: `hsl(${Math.random() * 360}, 100%, ${Math.random() * 50 + 40}%)`, // Dynamic brightness
+      rotation: Math.random() * 360, // Random rotation angle
+      rotationSpeed: Math.random() * 5 - 2.5, // Rotation speed (-2.5 to 2.5 deg/frame)
+      animationDuration: Math.random() * 4 + 1.5, // Random animation duration (1.5s - 5.5s)
+      velocityX: Math.random() * 6 - 3, // Sideways motion (-3 to 3)
+      velocityY: Math.random() * 3 + 2, // Downward motion (2 to 5)
+    }));
+  
+    setConfetti(newConfetti);
   };
+  
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,9 +60,15 @@ export default function Contact() {
       return;
     }
 
-    if (formData.selectedPlatforms.includes("Other") && !formData.otherPlatformName) {
-      alert("Please enter the name of the other platform");
-      return;
+    // Validate other platforms
+    if (formData.selectedPlatforms.includes("Other")) {
+      const invalidOther = formData.otherPlatforms.some(
+        platform => !platform.name || !platform.handle
+      );
+      if (invalidOther) {
+        alert("Please fill in all Other platform details");
+        return;
+      }
     }
 
     console.log("Form submitted:", formData);
@@ -76,9 +82,8 @@ export default function Contact() {
         Instagram: "",
         LinkedIn: "",
         Facebook: "",
-        Other: "",
       },
-      otherPlatformName: "",
+      otherPlatforms: [],
       selectedPlatforms: ["Instagram"],
       privacyAccepted: false,
     });
@@ -90,16 +95,12 @@ export default function Contact() {
         ? prevState.selectedPlatforms.filter((p) => p !== platform)
         : [...prevState.selectedPlatforms, platform];
 
-      // Reset otherPlatformName and Other handle if Other is deselected
+      // Reset other platforms if Other is deselected
       if (platform === "Other" && !newSelectedPlatforms.includes("Other")) {
         return {
           ...prevState,
           selectedPlatforms: newSelectedPlatforms,
-          otherPlatformName: "",
-          socialHandles: {
-            ...prevState.socialHandles,
-            Other: "",
-          },
+          otherPlatforms: [],
         };
       }
 
@@ -120,56 +121,102 @@ export default function Contact() {
     }));
   };
 
+  const addOtherPlatform = () => {
+    setFormData((prevState) => ({
+      ...prevState,
+      otherPlatforms: [...prevState.otherPlatforms, { name: "", handle: "" }],
+    }));
+  };
+
+  const updateOtherPlatform = (index, field, value) => {
+    setFormData((prevState) => {
+      const newOtherPlatforms = [...prevState.otherPlatforms];
+      newOtherPlatforms[index] = {
+        ...newOtherPlatforms[index],
+        [field]: value,
+      };
+      return {
+        ...prevState,
+        otherPlatforms: newOtherPlatforms,
+      };
+    });
+  };
+
+  const removeOtherPlatform = (index) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      otherPlatforms: prevState.otherPlatforms.filter((_, i) => i !== index),
+    }));
+  };
+
   const renderSocialHandleInputs = () => {
-    return formData.selectedPlatforms.map((platform) => {
-      if (platform === "Other") {
-        return (
-          <div key={platform} className="space-y-3 mt-3 md:mt-4">
-            <div className="relative group">
+    return (
+      <>
+        {formData.selectedPlatforms
+          .filter(platform => platform !== "Other")
+          .map((platform) => (
+            <div key={platform} className="relative group mt-3 md:mt-4">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-0 group-hover:opacity-25 transition duration-300"></div>
               <input
                 type="text"
-                placeholder="Enter other platform name"
-                className="relative w-full p-3 md:p-4 rounded-lg bg-black/60 border border-slate-700 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 text-white placeholder-slate-500 shadow-md text-sm md:text-base"
-                value={formData.otherPlatformName}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    otherPlatformName: e.target.value,
-                  })
-                }
-                required
-              />
-            </div>
-            <div className="relative group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-0 group-hover:opacity-25 transition duration-300"></div>
-              <input
-                type="text"
-                placeholder={`Your ${formData.otherPlatformName || "Other"} Handle`}
+                placeholder={`Your ${platform} Handle`}
                 className="relative w-full p-3 md:p-4 rounded-lg bg-black/60 border border-slate-700 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 text-white placeholder-slate-500 shadow-md text-sm md:text-base"
                 value={formData.socialHandles[platform]}
                 onChange={(e) => handleSocialHandleChange(platform, e.target.value)}
                 required
               />
             </div>
-          </div>
-        );
-      }
+          ))}
 
-      return (
-        <div key={platform} className="relative group mt-3 md:mt-4">
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-0 group-hover:opacity-25 transition duration-300"></div>
-          <input
-            type="text"
-            placeholder={`Your ${platform} Handle`}
-            className="relative w-full p-3 md:p-4 rounded-lg bg-black/60 border border-slate-700 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 text-white placeholder-slate-500 shadow-md text-sm md:text-base"
-            value={formData.socialHandles[platform]}
-            onChange={(e) => handleSocialHandleChange(platform, e.target.value)}
-            required
-          />
-        </div>
-      );
-    });
+        {formData.selectedPlatforms.includes("Other") && (
+          <div className="space-y-3 mt-3 md:mt-4">
+            {formData.otherPlatforms.map((platform, index) => (
+              <div key={index} className="space-y-3">
+                <div className="flex gap-3">
+                  <div className="relative group flex-1">
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-0 group-hover:opacity-25 transition duration-300"></div>
+                    <input
+                      type="text"
+                      placeholder="Platform name"
+                      className="relative w-full p-3 md:p-4 rounded-lg bg-black/60 border border-slate-700 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 text-white placeholder-slate-500 shadow-md text-sm md:text-base"
+                      value={platform.name}
+                      onChange={(e) => updateOtherPlatform(index, "name", e.target.value)}
+                      required
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => removeOtherPlatform(index)}
+                    className="p-3 md:p-4 rounded-lg bg-red-500/20 hover:bg-red-500/30 border border-red-500/50 text-red-500 transition-colors"
+                  >
+                    <X className="w-4 h-4 md:w-5 md:h-5" />
+                  </button>
+                </div>
+                <div className="relative group">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-0 group-hover:opacity-25 transition duration-300"></div>
+                  <input
+                    type="text"
+                    placeholder="Social handle"
+                    className="relative w-full p-3 md:p-4 rounded-lg bg-black/60 border border-slate-700 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 text-white placeholder-slate-500 shadow-md text-sm md:text-base"
+                    value={platform.handle}
+                    onChange={(e) => updateOtherPlatform(index, "handle", e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={addOtherPlatform}
+              className="flex items-center gap-2 p-3 md:p-4 rounded-lg bg-violet-500/20 hover:bg-violet-500/30 border border-violet-500/50 text-violet-400 transition-colors w-full justify-center"
+            >
+              <Plus className="w-4 h-4 md:w-5 md:h-5" />
+              Add Another Platform
+            </button>
+          </div>
+        )}
+      </>
+    );
   };
 
   // Rest of your component remains the same...
@@ -191,9 +238,9 @@ export default function Contact() {
 
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               {[
-                { name: "name", placeholder: "Full Name", type: "text" },
-                { name: "email", placeholder: "Email Address", type: "email" },
-                { name: "phone", placeholder: "Phone Number", type: "tel" },
+                { name: "name", placeholder: "Full Name  * ", type: "text" },
+                { name: "email", placeholder: "Email Address  * ", type: "email" },
+                { name: "phone", placeholder: "WhatsApp Number  * ", type: "tel" },
               ].map((field) => (
                 <div key={field.name} className="relative group">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-0 group-hover:opacity-25 transition duration-300"></div>
@@ -280,24 +327,24 @@ export default function Contact() {
           <div className="absolute inset-0 overflow-hidden">
             {confetti.map((piece) => (
               <div
-                key={piece.id}
-                className="absolute rounded-md"
-                style={{
-                  left: `${piece.x}px`,
-                  top: `${piece.y}px`,
-                  width: `${piece.size}px`,
-                  height: `${piece.size}px`,
-                  backgroundColor: piece.color,
-                  transform: `rotate(${piece.rotation}deg)`,
-                  opacity: "0.8",
-                  animation: `float ${
-                    piece.animationDuration
-                  }s ease-in-out infinite alternate, 
-                            fadeInOut ${
-                              piece.animationDuration * 1.5
-                            }s ease-in-out infinite alternate`,
-                }}
-              ></div>
+              key={piece.id}
+              className="absolute rounded-full"
+              style={{
+                left: `${piece.x}px`,
+                top: `${piece.y}px`,
+                width: `${piece.size}px`,
+                height: `${piece.size}px`,
+                backgroundColor: piece.color,
+                opacity: "1",
+                transform: `rotate(${piece.rotation}deg)`,
+                animation: `
+                  fall ${piece.animationDuration}s linear infinite,
+                  sway ${piece.animationDuration * 1.2}s ease-in-out infinite alternate,
+                  fadeInOut ${piece.animationDuration * 1.5}s ease-in-out infinite alternate
+                `,
+              }}
+            ></div>
+            
             ))}
           </div>
 
@@ -370,7 +417,32 @@ export default function Contact() {
             opacity: 1;
           }
         }
-
+        @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          @keyframes float {
+            from {
+              transform: translateY(0);
+            }
+            to {
+              transform: translateY(-15px);
+            }
+          }
+          @keyframes fadeInOut {
+            0%, 100% {
+              opacity: 0;
+            }
+            50% {
+              opacity: 1;
+            }
+          }
         .animate-bounce-in {
           animation: bounce-in 0.5s cubic-bezier(0.38, 0.1, 0.36, 1.47) forwards;
         }

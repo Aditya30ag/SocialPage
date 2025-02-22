@@ -218,7 +218,7 @@ const LocalStatsSection = () => {
                     <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg"></div>
                     <div className="absolute inset-0.5 bg-black rounded-lg"></div>
                     <span className="relative z-10 flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
-                      Select Language
+                    Multilingual Support
                       <Languages className="w-5 h-5 text-cyan-400" />
                     </span>
                   </button>
