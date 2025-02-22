@@ -1,54 +1,174 @@
-import React, { useState, useEffect } from "react";
-import { ArrowRight, X, Plus } from "lucide-react";
+import React, { useState, useEffect, useCallback } from "react";
+import { ArrowRight, X, Plus, ChevronDown } from "lucide-react";
+
+// Country codes data
+const countryCodes = [
+  { code: "+91", country: "India" },
+  { code: "+1", country: "USA" },
+  { code: "+44", country: "UK" },
+  { code: "+61", country: "Australia" },
+  { code: "+971", country: "UAE" },
+  // Add more country codes as needed
+];
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
+    phone: {
+      countryCode: "+91",
+      number: "",
+    },
     socialHandles: {
       Instagram: "",
       LinkedIn: "",
       Facebook: "",
     },
-    otherPlatforms: [], // Array of {name: string, handle: string}
+    otherPlatforms: [],
     selectedPlatforms: ["Instagram"],
     privacyAccepted: false,
   });
 
-  const [showModal, setShowModal] = useState(false);
+  const [showCountryList, setShowCountryList] = useState(false);
+  const [phoneError, setPhoneError] = useState("");
+
+  // ... (keep existing confetti and other effects code)
+
+  const validatePhone = (number) => {
+    const digits = number.replace(/\D/g, '');
+    if (digits.length !== 10) {
+      setPhoneError("Phone number must be exactly 10 digits");
+      return false;
+    }
+    setPhoneError("");
+    return true;
+  };
   const [confetti, setConfetti] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  const generateConfetti = useCallback(() => {
+    const colors = [
+      '#FF69B4', // Pink
+      '#87CEEB', // Sky Blue
+      '#98FB98', // Pale Green
+      '#DDA0DD', // Plum
+      '#F0E68C', // Khaki
+    ];
+
+    const confettiCount = 20;
+    const newConfetti = Array.from({ length: confettiCount }, (_, i) => ({
+      id: `${i}-${Date.now()}`,
+      x: Math.random() * 100, // Use percentage instead of pixels
+      y: -5, // Start slightly above the viewport
+      size: Math.random() * 8 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      speed: Math.random() * + 1,
+      spin: Math.random() * 360,
+      spinSpeed: (Math.random() - 0.5) * 15,
+      shape: Math.random() > 0.5 ? 'circle' : 'square',
+    }));
+
+    setConfetti(prev => [...prev, ...newConfetti].slice(-200));
+  }, []);
 
   useEffect(() => {
     if (showModal) {
       generateConfetti();
+      const interval = setInterval(generateConfetti, 300);
+      return () => clearInterval(interval);
     } else {
       setConfetti([]);
     }
-  }, [showModal]);
+  }, [showModal, generateConfetti]);
 
-  const generateConfetti = () => {
-    const confettiCount = 50; // Increased for more visual impact
-    const newConfetti = Array.from({ length: confettiCount }, (_, i) => ({
-      id: i,
-      x: Math.random() * window.innerWidth, // Random horizontal position
-      y: Math.random() * window.innerHeight, // Random vertical position
-      size: Math.random() * 12 + 4, // More varied sizes (4px - 16px)
-      color: `hsl(${Math.random() * 360}, 100%, ${Math.random() * 50 + 40}%)`, // Dynamic brightness
-      rotation: Math.random() * 360, // Random rotation angle
-      rotationSpeed: Math.random() * 5 - 2.5, // Rotation speed (-2.5 to 2.5 deg/frame)
-      animationDuration: Math.random() * 4 + 1.5, // Random animation duration (1.5s - 5.5s)
-      velocityX: Math.random() * 6 - 3, // Sideways motion (-3 to 3)
-      velocityY: Math.random() * 3 + 2, // Downward motion (2 to 5)
+  // Modal with fixed confetti
+  const renderModal = () => (
+    <div className="fixed inset-0 flex items-center justify-center z-50 px-4">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowModal(false)} />
+      
+      {/* Confetti container */}
+      <div className="absolute inset-0 overflow-visible pointer-events-none">
+        {confetti.map((piece) => (
+          <div
+            key={piece.id}
+            className={`absolute ${piece.shape === 'circle' ? 'rounded-full' : ''}`}
+            style={{
+              left: `${piece.x}%`,
+              top: `${piece.y}%`,
+              width: `${piece.size}px`,
+              height: `${piece.size}px`,
+              backgroundColor: piece.color,
+              position: 'absolute',
+              animation: `
+                confettiFall 3s linear forwards,
+                confettiSpin ${piece.spinSpeed}s linear infinite
+              `,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Modal content */}
+      <div className="relative bg-black/80 border border-slate-800 rounded-xl p-6 md:p-8 w-full max-w-md mx-auto shadow-2xl animate-bounce-in">
+        <button
+          onClick={() => setShowModal(false)}
+          className="absolute top-3 right-3 md:top-4 md:right-4 text-slate-400 hover:text-white transition-colors"
+        >
+          <X className="w-5 h-5 md:w-6 md:h-6" />
+        </button>
+
+        <h3 className="text-xl md:text-2xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
+          Welcome to Hirecentive Social
+        </h3>
+
+        <p className="text-slate-300 text-sm md:text-base mb-6">
+          Your journey with Hirecentive Social is set to start really soon!
+          We'll be in touch with you shortly to help you get started, after
+          a quick verification process!
+        </p>
+
+        <button
+          onClick={() => setShowModal(false)}
+          className="w-full py-2 md:py-3 px-4 rounded-lg bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-white font-semibold hover:opacity-90 transition-opacity text-sm md:text-base"
+        >
+          Got it!
+        </button>
+      </div>
+    </div>
+  );
+  const handlePhoneChange = (e) => {
+    const value = e.target.value;
+    // Only allow digits
+    const digits = value.replace(/\D/g, '');
+    
+    setFormData(prev => ({
+      ...prev,
+      phone: {
+        ...prev.phone,
+        number: digits
+      }
     }));
-  
-    setConfetti(newConfetti);
+    
+    validatePhone(digits);
   };
-  
-  
+
+  const handleCountryCodeChange = (code) => {
+    setFormData(prev => ({
+      ...prev,
+      phone: {
+        ...prev.phone,
+        countryCode: code
+      }
+    }));
+    setShowCountryList(false);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!validatePhone(formData.phone.number)) {
+      return;
+    }
 
     if (!formData.privacyAccepted) {
       alert("Please accept the privacy policy to continue");
@@ -74,10 +194,14 @@ export default function Contact() {
     console.log("Form submitted:", formData);
     setShowModal(true);
 
+    // Reset form
     setFormData({
       name: "",
       email: "",
-      phone: "",
+      phone: {
+        countryCode: "+91",
+        number: "",
+      },
       socialHandles: {
         Instagram: "",
         LinkedIn: "",
@@ -237,10 +361,10 @@ export default function Contact() {
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+              {/* Name and Email fields */}
               {[
                 { name: "name", placeholder: "Full Name  * ", type: "text" },
                 { name: "email", placeholder: "Email Address  * ", type: "email" },
-                { name: "phone", placeholder: "WhatsApp Number  * ", type: "tel" },
               ].map((field) => (
                 <div key={field.name} className="relative group">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-0 group-hover:opacity-25 transition duration-300"></div>
@@ -256,6 +380,51 @@ export default function Contact() {
                   />
                 </div>
               ))}
+
+              {/* Phone Input with Country Code */}
+              <div className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-0 group-hover:opacity-25 transition duration-300"></div>
+                <div className="relative flex gap-2">
+                  <div className="relative ">
+                    <button
+                      type="button"
+                      className="h-full px-3 md:px-4 rounded-lg bg-black/60 border border-slate-700 text-white flex items-center gap-2 hover:border-cyan-400 transition-all duration-300"
+                      onClick={() => setShowCountryList(!showCountryList)}
+                    >
+                      <span>{formData.phone.countryCode}</span>
+                      <ChevronDown className="w-4 h-4" />
+                    </button>
+                    
+                    {showCountryList && (
+                      <div className="absolute top-full left-0 mt-1 w-48 max-h-48 bg-black/90 border border-slate-700 rounded-lg shadow-xl z-50 overflow-y-auto scrollbar-none">
+                        {countryCodes.map((country) => (
+                          <button
+                            key={country.code}
+                            type="button"
+                            className="w-full px-4 py-2 text-left text-white hover:bg-slate-700/50 transition-colors"
+                            onClick={() => handleCountryCodeChange(country.code)}
+                          >
+                            {country.country} ({country.code})
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  
+                  <input
+                    type="tel"
+                    placeholder="WhatsApp Number  * "
+                    className="relative flex-1 p-3 md:p-4 rounded-lg bg-black/60 border border-slate-700 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 text-white placeholder-slate-500 shadow-md text-sm md:text-base"
+                    value={formData.phone.number}
+                    onChange={handlePhoneChange}
+                    maxLength="10"
+                    required
+                  />
+                </div>
+                {phoneError && (
+                  <p className="text-red-500 text-sm mt-1">{phoneError}</p>
+                )}
+              </div>
 
               <div className="p-3 md:p-4 rounded-lg bg-black/60 border border-slate-700 shadow-md">
                 <label className="block text-white mb-3 text-sm md:text-base">
@@ -322,66 +491,49 @@ export default function Contact() {
       </section>
 
       {/* Modal - Responsive design */}
-      {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 overflow-hidden px-4">
-          <div className="absolute inset-0 overflow-hidden">
-            {confetti.map((piece) => (
-              <div
-              key={piece.id}
-              className="absolute rounded-full"
-              style={{
-                left: `${piece.x}px`,
-                top: `${piece.y}px`,
-                width: `${piece.size}px`,
-                height: `${piece.size}px`,
-                backgroundColor: piece.color,
-                opacity: "1",
-                transform: `rotate(${piece.rotation}deg)`,
-                animation: `
-                  fall ${piece.animationDuration}s linear infinite,
-                  sway ${piece.animationDuration * 1.2}s ease-in-out infinite alternate,
-                  fadeInOut ${piece.animationDuration * 1.5}s ease-in-out infinite alternate
-                `,
-              }}
-            ></div>
-            
-            ))}
-          </div>
-
-          <div
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-            onClick={() => setShowModal(false)}
-          ></div>
-
-          <div className="relative bg-black/80 border border-slate-800 rounded-xl p-6 md:p-8 w-full max-w-md mx-auto shadow-2xl animate-bounce-in">
-            <button
-              onClick={() => setShowModal(false)}
-              className="absolute top-3 right-3 md:top-4 md:right-4 text-slate-400 hover:text-white transition-colors"
-            >
-              <X className="w-5 h-5 md:w-6 md:h-6" />
-            </button>
-
-            <h3 className="text-xl md:text-2xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
-              Welcome to Hirecentive Social
-            </h3>
-
-            <p className="text-slate-300 text-sm md:text-base mb-6">
-              Your journey with Hirecentive Social is set to start really soon!
-              We'll be in touch with you shortly to help you get started, after
-              a quick verification process!
-            </p>
-
-            <button
-              onClick={() => setShowModal(false)}
-              className="w-full py-2 md:py-3 px-4 rounded-lg bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-white font-semibold hover:opacity-90 transition-opacity text-sm md:text-base"
-            >
-              Got it!
-            </button>
-          </div>
-        </div>
-      )}
+      {showModal && renderModal()}
 
       <style jsx>{`
+      @keyframes confettiFall {
+          0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+          }
+          75% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(100vh) rotate(720deg);
+            opacity: 0;
+          }
+        }
+
+        @keyframes confettiSpin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+          .animate-bounce-in {
+          animation: bounce-in 0.5s cubic-bezier(0.38, 0.1, 0.36, 1.47) forwards;
+        }
+
+        @keyframes bounce-in {
+          0% {
+            transform: scale(0.9);
+            opacity: 0;
+          }
+          70% {
+            transform: scale(1.05);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
         @keyframes float {
           0% {
             transform: translateY(0) rotate(0deg);
