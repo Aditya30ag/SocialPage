@@ -180,7 +180,18 @@ const IntroAnimation = () => {
             <ChevronRight className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
           </button>
           
-          
+          <div className="absolute top-10 right-8 z-50">
+          <div className="text-center">
+              <button className="group relative px-6 py-3 rounded-lg text-sm font-bold transition-all duration-300 hover:scale-105">
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg opacity-75"></div>
+                <div className="absolute inset-0.5 bg-black rounded-lg"></div>
+                <span className="relative flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
+                  Login
+                  
+                </span>
+              </button>
+            </div>
+          </div>
 
           <div className={`w-full transition-all duration-500 transform 
             ${direction === 'right' ? 

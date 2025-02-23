@@ -311,8 +311,9 @@ export default function Chatbot() {
       {/* Chat Support Button */}
       <button 
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 bg-gradient-to-r from-cyan-400 to-violet-500 p-4 rounded-full shadow-lg hover:scale-110 transition-transform z-50 group"
+        className="fixed bottom-6 right-6 bg-gradient-to-r from-cyan-900 to-cyan-500 p-4 rounded-full shadow-lg hover:scale-110 transition-transform z-50 group"
       >
+          
         <MessageCircle className="w-6 h-6 text-white" />
         <span className="absolute left-full ml-2 bg-black px-3 py-1 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
           Chat with Support
