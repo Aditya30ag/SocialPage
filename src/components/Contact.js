@@ -35,7 +35,7 @@ export default function Contact() {
   // ... (keep existing confetti and other effects code)
 
   const validatePhone = (number) => {
-    const digits = number.replace(/\D/g, '');
+    const digits = number.replace(/\D/g, "");
     if (digits.length !== 10) {
       setPhoneError("Phone number must be exactly 10 digits");
       return false;
@@ -43,70 +43,91 @@ export default function Contact() {
     setPhoneError("");
     return true;
   };
-  const [confetti, setConfetti] = useState([]);
+
   const [showModal, setShowModal] = useState(false);
 
-  const generateConfetti = useCallback(() => {
-    const colors = [
-      '#FF69B4', // Pink
-      '#87CEEB', // Sky Blue
-      '#98FB98', // Pale Green
-      '#DDA0DD', // Plum
-      '#F0E68C', // Khaki
-    ];
-
-    const confettiCount = 20;
-    const newConfetti = Array.from({ length: confettiCount }, (_, i) => ({
-      id: `${i}-${Date.now()}`,
-      x: Math.random() * 100, // Use percentage instead of pixels
-      y: -5, // Start slightly above the viewport
-      size: Math.random() * 8 + 4,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      speed: Math.random() * + 1,
-      spin: Math.random() * 360,
-      spinSpeed: (Math.random() - 0.5) * 15,
-      shape: Math.random() > 0.5 ? 'circle' : 'square',
-    }));
-
-    setConfetti(prev => [...prev, ...newConfetti].slice(-200));
-  }, []);
-
   useEffect(() => {
-    if (showModal) {
-      generateConfetti();
-      const interval = setInterval(generateConfetti, 300);
-      return () => clearInterval(interval);
-    } else {
-      setConfetti([]);
+    if (!showModal) return;
+
+    let container = document.getElementById("confetti-container");
+    if (!container) {
+      container = document.createElement("div");
+      container.id = "confetti-container";
+      container.className =
+        "fixed inset-0 pointer-events-none z-50 overflow-hidden";
+      document.body.appendChild(container);
     }
-  }, [showModal, generateConfetti]);
+
+    const createConfetti = () => {
+      const shapes = ["circle"];
+      const colors = [
+        "from-cyan-400 to-violet-500",
+        "from-violet-500 to-amber-400",
+        "from-amber-400 to-cyan-400",
+        "from-pink-400 to-purple-500",
+        "from-yellow-400 to-orange-500",
+      ];
+
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement("div");
+        const shape = shapes[Math.floor(Math.random() * shapes.length)];
+
+        confetti.className = `absolute w-3 h-3 bg-gradient-to-r ${
+          colors[Math.floor(Math.random() * colors.length)]
+        } ${shape === "circle" ? "rounded-full" : "rounded-sm"}`;
+
+        const startX = Math.random() * 100;
+        confetti.style.left = `${startX}vw`;
+        confetti.style.top = "-10px";
+
+        const scale = 0.1 + Math.random() * 0.1; // Previous was 0.6 + random * 1.2
+        const horizontalDrift = -15 + Math.random() * 30;
+        const duration = 5 + Math.random() * 3;
+        const delay = Math.random() * 0.01;
+        const rotationSpeed = 2 + Math.random() * 5;
+
+        confetti.style.transform = `scale(${scale})`;
+        confetti.style.animation = `
+          confettiFall ${duration}s ${delay}s ease-in-out forwards,
+          confettiDrift ${duration}s ${delay}s ease-in-out infinite alternate,
+          confettiRotate ${rotationSpeed}s linear infinite`;
+
+        confetti.style.setProperty("--drift-distance", `${horizontalDrift}px`);
+
+        container.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), (duration + delay) * 1000);
+      }
+    };
+
+    createConfetti();
+    let burstCount = 0;
+    const maxBursts = 3;
+    const interval = setInterval(() => {
+      burstCount++;
+      createConfetti();
+      if (burstCount >= maxBursts) {
+        clearInterval(interval);
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+      if (container) {
+        container.remove();
+      }
+    };
+  }, [showModal]);
 
   // Modal with fixed confetti
   const renderModal = () => (
     <div className="fixed inset-0 flex items-center justify-center z-50 px-4">
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowModal(false)} />
-      
+      <div
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        onClick={() => setShowModal(false)}
+      />
+
       {/* Confetti container */}
-      <div className="absolute inset-0 overflow-visible pointer-events-none">
-        {confetti.map((piece) => (
-          <div
-            key={piece.id}
-            className={`absolute ${piece.shape === 'circle' ? 'rounded-full' : ''}`}
-            style={{
-              left: `${piece.x}%`,
-              top: `${piece.y}%`,
-              width: `${piece.size}px`,
-              height: `${piece.size}px`,
-              backgroundColor: piece.color,
-              position: 'absolute',
-              animation: `
-                confettiFall 3s linear forwards,
-                confettiSpin ${piece.spinSpeed}s linear infinite
-              `,
-            }}
-          />
-        ))}
-      </div>
 
       {/* Modal content */}
       <div className="relative bg-black/80 border border-slate-800 rounded-xl p-6 md:p-8 w-full max-w-md mx-auto shadow-2xl animate-bounce-in">
@@ -123,8 +144,8 @@ export default function Contact() {
 
         <p className="text-slate-300 text-sm md:text-base mb-6">
           Your journey with Hirecentive Social is set to start really soon!
-          We'll be in touch with you shortly to help you get started, after
-          a quick verification process!
+          We'll be in touch with you shortly to help you get started, after a
+          quick verification process!
         </p>
 
         <button
@@ -139,26 +160,26 @@ export default function Contact() {
   const handlePhoneChange = (e) => {
     const value = e.target.value;
     // Only allow digits
-    const digits = value.replace(/\D/g, '');
-    
-    setFormData(prev => ({
+    const digits = value.replace(/\D/g, "");
+
+    setFormData((prev) => ({
       ...prev,
       phone: {
         ...prev.phone,
-        number: digits
-      }
+        number: digits,
+      },
     }));
-    
+
     validatePhone(digits);
   };
 
   const handleCountryCodeChange = (code) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       phone: {
         ...prev.phone,
-        countryCode: code
-      }
+        countryCode: code,
+      },
     }));
     setShowCountryList(false);
   };
@@ -183,7 +204,7 @@ export default function Contact() {
     // Validate other platforms
     if (formData.selectedPlatforms.includes("Other")) {
       const invalidOther = formData.otherPlatforms.some(
-        platform => !platform.name || !platform.handle
+        (platform) => !platform.name || !platform.handle
       );
       if (invalidOther) {
         alert("Please fill in all Other platform details");
@@ -215,7 +236,9 @@ export default function Contact() {
 
   const handlePlatformToggle = (platform) => {
     setFormData((prevState) => {
-      const newSelectedPlatforms = prevState.selectedPlatforms.includes(platform)
+      const newSelectedPlatforms = prevState.selectedPlatforms.includes(
+        platform
+      )
         ? prevState.selectedPlatforms.filter((p) => p !== platform)
         : [...prevState.selectedPlatforms, platform];
 
@@ -277,7 +300,7 @@ export default function Contact() {
     return (
       <>
         {formData.selectedPlatforms
-          .filter(platform => platform !== "Other")
+          .filter((platform) => platform !== "Other")
           .map((platform) => (
             <div key={platform} className="relative group mt-3 md:mt-4">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-0 group-hover:opacity-25 transition duration-300"></div>
@@ -286,7 +309,9 @@ export default function Contact() {
                 placeholder={`Your ${platform} Handle`}
                 className="relative w-full p-3 md:p-4 rounded-lg bg-black/60 border border-slate-700 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 text-white placeholder-slate-500 shadow-md text-sm md:text-base"
                 value={formData.socialHandles[platform]}
-                onChange={(e) => handleSocialHandleChange(platform, e.target.value)}
+                onChange={(e) =>
+                  handleSocialHandleChange(platform, e.target.value)
+                }
                 required
               />
             </div>
@@ -304,7 +329,9 @@ export default function Contact() {
                       placeholder="Platform name"
                       className="relative w-full p-3 md:p-4 rounded-lg bg-black/60 border border-slate-700 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 text-white placeholder-slate-500 shadow-md text-sm md:text-base"
                       value={platform.name}
-                      onChange={(e) => updateOtherPlatform(index, "name", e.target.value)}
+                      onChange={(e) =>
+                        updateOtherPlatform(index, "name", e.target.value)
+                      }
                       required
                     />
                   </div>
@@ -323,7 +350,9 @@ export default function Contact() {
                     placeholder="Social handle"
                     className="relative w-full p-3 md:p-4 rounded-lg bg-black/60 border border-slate-700 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 text-white placeholder-slate-500 shadow-md text-sm md:text-base"
                     value={platform.handle}
-                    onChange={(e) => updateOtherPlatform(index, "handle", e.target.value)}
+                    onChange={(e) =>
+                      updateOtherPlatform(index, "handle", e.target.value)
+                    }
                     required
                   />
                 </div>
@@ -346,7 +375,10 @@ export default function Contact() {
   // Rest of your component remains the same...
   return (
     <>
-      <section className="min-h-full w-full py-6 md:py-12 px-4 md:px-8 lg:px-24 relative flex items-center justify-center" id="contact-us">
+      <section
+        className="min-h-full w-full py-6 md:py-12 px-4 md:px-8 lg:px-24 relative flex items-center justify-center"
+        id="contact-us"
+      >
         <div className="absolute inset-0 bg-gradient-to-r from-violet-600/20 to-cyan-400/20 blur-3xl"></div>
 
         <div className="max-w-xl mx-auto relative">
@@ -364,7 +396,11 @@ export default function Contact() {
               {/* Name and Email fields */}
               {[
                 { name: "name", placeholder: "Full Name  * ", type: "text" },
-                { name: "email", placeholder: "Email Address  * ", type: "email" },
+                {
+                  name: "email",
+                  placeholder: "Email Address  * ",
+                  type: "email",
+                },
               ].map((field) => (
                 <div key={field.name} className="relative group">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-0 group-hover:opacity-25 transition duration-300"></div>
@@ -394,7 +430,7 @@ export default function Contact() {
                       <span>{formData.phone.countryCode}</span>
                       <ChevronDown className="w-4 h-4" />
                     </button>
-                    
+
                     {showCountryList && (
                       <div className="absolute top-full left-0 mt-1 w-48 max-h-48 bg-black/90 border border-slate-700 rounded-lg shadow-xl z-50 overflow-y-auto scrollbar-none">
                         {countryCodes.map((country) => (
@@ -402,7 +438,9 @@ export default function Contact() {
                             key={country.code}
                             type="button"
                             className="w-full px-4 py-2 text-left text-white hover:bg-slate-700/50 transition-colors"
-                            onClick={() => handleCountryCodeChange(country.code)}
+                            onClick={() =>
+                              handleCountryCodeChange(country.code)
+                            }
                           >
                             {country.country} ({country.code})
                           </button>
@@ -410,7 +448,7 @@ export default function Contact() {
                       </div>
                     )}
                   </div>
-                  
+
                   <input
                     type="tel"
                     placeholder="WhatsApp Number  * "
@@ -439,7 +477,9 @@ export default function Contact() {
                       >
                         <input
                           type="checkbox"
-                          checked={formData.selectedPlatforms.includes(platform)}
+                          checked={formData.selectedPlatforms.includes(
+                            platform
+                          )}
                           onChange={() => handlePlatformToggle(platform)}
                           className="h-4 w-4 appearance-none border border-slate-700 bg-slate-800 rounded-md checked:bg-blue-500 checked:border-blue-500 focus:ring-2 transition-all duration-200"
                         />
@@ -494,30 +534,15 @@ export default function Contact() {
       {showModal && renderModal()}
 
       <style jsx>{`
-      @keyframes confettiFall {
+        @keyframes confettiFall {
           0% {
             transform: translateY(0) rotate(0deg);
-            opacity: 1;
-          }
-          75% {
             opacity: 1;
           }
           100% {
             transform: translateY(100vh) rotate(720deg);
             opacity: 0;
           }
-        }
-
-        @keyframes confettiSpin {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-          .animate-bounce-in {
-          animation: bounce-in 0.5s cubic-bezier(0.38, 0.1, 0.36, 1.47) forwards;
         }
 
         @keyframes bounce-in {
@@ -570,31 +595,32 @@ export default function Contact() {
           }
         }
         @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
+          from {
+            opacity: 0;
+            transform: translateY(20px);
           }
-          @keyframes float {
-            from {
-              transform: translateY(0);
-            }
-            to {
-              transform: translateY(-15px);
-            }
+          to {
+            opacity: 1;
+            transform: translateY(0);
           }
-          @keyframes fadeInOut {
-            0%, 100% {
-              opacity: 0;
-            }
-            50% {
-              opacity: 1;
-            }
+        }
+        @keyframes float {
+          from {
+            transform: translateY(0);
           }
+          to {
+            transform: translateY(-15px);
+          }
+        }
+        @keyframes fadeInOut {
+          0%,
+          100% {
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+        }
         .animate-bounce-in {
           animation: bounce-in 0.5s cubic-bezier(0.38, 0.1, 0.36, 1.47) forwards;
         }
