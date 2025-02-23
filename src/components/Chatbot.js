@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageCircle, Send, X } from 'lucide-react';
+import { MessageCircle, Send, X, ArrowLeft } from 'lucide-react';
 
 // FAQ data
 const FAQS = {
@@ -67,7 +67,7 @@ const ChatOptions = ({ options, onSelect }) => (
   </div>
 );
 
-const ContactForm = ({ onSubmit, onCancel }) => {
+const ContactForm = ({ onSubmit, onCancel, onBack }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -82,51 +82,51 @@ const ContactForm = ({ onSubmit, onCancel }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
-      <div>
-        <input
-          type="text"
-          placeholder="Your Name *"
-          required
-          className="w-full bg-black/60 border border-slate-700 rounded-lg px-4 py-2 
-                    text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
-          value={formData.name}
-          onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-        />
-      </div>
-      <div>
-        <input
-          type="email"
-          placeholder="Email Address *"
-          required
-          className="w-full bg-black/60 border border-slate-700 rounded-lg px-4 py-2 
-                    text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
-          value={formData.email}
-          onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-        />
-      </div>
-      <div>
-        <input
-          type="tel"
-          placeholder="Phone Number *"
-          required
-          className="w-full bg-black/60 border border-slate-700 rounded-lg px-4 py-2 
-                    text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
-          value={formData.phone}
-          onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-        />
-      </div>
-      <div>
-        <textarea
-          placeholder="Your Message *"
-          required
-          rows={3}
-          className="w-full bg-black/60 border border-slate-700 rounded-lg px-4 py-2 
-                    text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
-          value={formData.message}
-          onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
-        />
-      </div>
+      <input
+        type="text"
+        placeholder="Your Name *"
+        required
+        className="w-full bg-black/60 border border-slate-700 rounded-lg px-4 py-2 
+                  text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
+        value={formData.name}
+        onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+      />
+      <input
+        type="email"
+        placeholder="Email Address *"
+        required
+        className="w-full bg-black/60 border border-slate-700 rounded-lg px-4 py-2 
+                  text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
+        value={formData.email}
+        onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+      />
+      <input
+        type="tel"
+        placeholder="Phone Number *"
+        required
+        className="w-full bg-black/60 border border-slate-700 rounded-lg px-4 py-2 
+                  text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
+        value={formData.phone}
+        onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+      />
+      <textarea
+        placeholder="Your Message *"
+        required
+        rows={3}
+        className="w-full bg-black/60 border border-slate-700 rounded-lg px-4 py-2 
+                  text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
+        value={formData.message}
+        onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
+      />
       <div className="flex gap-2">
+        <button
+          type="button"
+          onClick={onBack}
+          className="flex items-center gap-2 px-4 py-2 border border-slate-700 rounded-lg text-slate-300 
+                    hover:bg-slate-700/50 transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" /> Back
+        </button>
         <button
           type="submit"
           className="flex-1 bg-gradient-to-r from-cyan-400 to-violet-500 rounded-lg px-4 py-2 
@@ -154,6 +154,8 @@ export default function Chatbot() {
   const [isTyping, setIsTyping] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
   const [userType, setUserType] = useState(null);
+  const [messageHistory, setMessageHistory] = useState([]);
+  const [optionsHistory, setOptionsHistory] = useState([]);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -169,10 +171,31 @@ export default function Chatbot() {
     setIsTyping(true);
     setTimeout(() => {
       setMessages(prev => [...prev, { text: message, isUser }]);
+      if (!isUser) {
+        setMessageHistory(prev => [...prev, { messages: [...messages, { text: message, isUser }], options: currentOptions }]);
+      }
       setIsTyping(false);
     }, 500);
   };
-
+  const handleBack = () => {
+    if (messageHistory.length > 0) {
+      const previousState = messageHistory[messageHistory.length - 2] || messageHistory[0];
+      setMessages(previousState.messages);
+      setCurrentOptions(previousState.options);
+      setMessageHistory(prev => prev.slice(0, -1));
+      setShowContactForm(false);
+    } else {
+      // Reset to initial state
+      setMessages([]);
+      setUserType(null);
+      addMessageWithDelay("Welcome to Hirecentive! Please select who you are:");
+      setCurrentOptions([
+        "I'm a company hiring",
+        "I'm an influencer",
+        "I'm looking for a job"
+      ]);
+    }
+  };
   useEffect(() => {
     if (isOpen && messages.length === 0) {
       addMessageWithDelay("Welcome to Hirecentive! Please select who you are:");
@@ -188,7 +211,7 @@ export default function Chatbot() {
     let type;
     let response;
     let nextOptions;
-
+    setShowBackButton(true); 
     switch (selection) {
       case "I'm a company hiring":
         type = USER_TYPES.COMPANY;
@@ -209,8 +232,8 @@ export default function Chatbot() {
         break;
       case "I'm looking for a job":
         type = USER_TYPES.CANDIDATE;
-        response = "Great! You can register at jobs.hirecentive.com to browse opportunities and connect with our network of influencers.";
-        nextOptions = ["Browse Jobs", "Contact Support", "Close Chat"];
+        response = "Great! You can register to browse opportunities and connect with our network of influencers.";
+        nextOptions = ["Register Now!", "Contact Support", "Close Chat"];
         break;
     }
 
@@ -218,7 +241,18 @@ export default function Chatbot() {
     addMessageWithDelay(response);
     setCurrentOptions(nextOptions);
   };
-
+  const handleMainMenuReturn = () => {
+    setMessages([]);
+    setUserType(null);
+    setShowContactForm(false);
+    setShowBackButton(false);
+    addMessageWithDelay("Welcome to Hirecentive! Please select who you are:");
+    setCurrentOptions([
+      "I'm a company hiring",
+      "I'm an influencer",
+      "I'm looking for a job"
+    ]);
+  };
   const handleContactFormSubmit = (formData) => {
     console.log('Contact form submitted:', formData);
     setShowContactForm(false);
@@ -271,7 +305,7 @@ export default function Chatbot() {
         }
     }
   };
-
+  const [showBackButton, setShowBackButton] = useState(false);
   return (
     <>
       {/* Chat Support Button */}
@@ -291,12 +325,23 @@ export default function Chatbot() {
         bg-black/90 backdrop-blur-xl border border-slate-800 rounded-2xl shadow-2xl 
         flex flex-col overflow-hidden animate-slide-up z-50 overflow-y-auto scrollbar-none">
 
-          {/* Header */}
+          {/* Updated Header */}
           <div className="p-4 border-b border-slate-800 bg-gradient-to-r from-cyan-400/10 to-violet-500/10">
             <div className="flex justify-between items-center">
-              <h3 className="text-lg font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text">
-                Hirecentive Assistant
-              </h3>
+              <div className="flex items-center gap-3">
+                {showBackButton && (
+                  <button 
+                    onClick={handleMainMenuReturn}
+                    className="flex items-center gap-1 text-slate-400 hover:text-white transition-colors bg-black/20 py-1 rounded-lg"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                    <span className="text-sm">Main Menu</span>
+                  </button>
+                )}
+                <h3 className="text-lg font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text">
+                  Hirecentive Assistant
+                </h3>
+              </div>
               <button 
                 onClick={() => setIsOpen(false)}
                 className="text-slate-400 hover:text-white transition-colors"
@@ -307,7 +352,7 @@ export default function Chatbot() {
           </div>
 
           {/* Messages Container */}
-          <div className="flex-1 overflow-y-auto scrollbar-none p-4">
+          <div className="flex-1 overflow-y-auto p-4">
             {messages.map((message, index) => (
               <ChatMessage key={index} message={message.text} isUser={message.isUser} />
             ))}
@@ -336,6 +381,7 @@ export default function Chatbot() {
                     setCurrentOptions(["Back to Main Menu", "Contact Support", "Close Chat"]);
                   }
                 }}
+                onBack={handleBack}
               />
             ) : (
               currentOptions.length > 0 && (

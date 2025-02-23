@@ -533,7 +533,7 @@ export default function Contact() {
       {/* Modal - Responsive design */}
       {showModal && renderModal()}
 
-      <style jsx>{`
+      <style>{`
         @keyframes confettiFall {
           0% {
             transform: translateY(0) rotate(0deg);
