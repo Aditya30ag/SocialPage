@@ -20,32 +20,32 @@ const CookiePopup = () => {
   }, []);
 
   const acceptCookies = () => {
-    localStorage.setItem("cookiesAccepted", "true"); // Store as string "true" instead of boolean
+    localStorage.setItem("cookiesAccepted", "true");
     setShowPopup(false);
     window.location.reload();
   };
 
   return (
     showPopup && (
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50">
-        <div className="relative bg-black p-6 rounded-xl shadow-lg w-96 text-center border border-slate-800">
+      <div className="fixed bottom-4 left-4 z-50 sm:max-w-sm max-w-[calc(100%-2rem)] w-full">
+        <div className="relative bg-black p-4 rounded-xl shadow-lg border border-slate-800">
           {/* Gradient Line */}
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
           
-          <h2 className="text-xl font-bold mb-3 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
+          <h2 className="text-lg font-bold mb-2 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
             We Use Cookies
           </h2>
           
-          <p className="text-sm text-slate-400 mb-5">
+          <p className="text-xs sm:text-sm text-slate-400 mb-3">
             This website uses cookies to ensure you get the best experience on Hirecentive Social.
           </p>
           
-          <div className="flex justify-center space-x-4 mt-4">
+          <div className="flex justify-center space-x-3 mt-3">
             {/* Accept Button */}
             <div className="text-center">
               <button
                 onClick={acceptCookies}
-                className="group relative px-6 py-3 rounded-lg text-sm font-bold transition-all duration-300 hover:scale-105"
+                className="group relative px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300 hover:scale-105"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg opacity-75"></div>
                 <div className="absolute inset-0.5 bg-black rounded-lg"></div>
@@ -58,7 +58,7 @@ const CookiePopup = () => {
             {/* Decline Button */}
             <button
               onClick={() => setShowPopup(false)}
-              className="text-slate-400 px-5 py-2 rounded-lg hover:text-cyan-400 transition-colors"
+              className="text-slate-400 px-3 py-2 rounded-lg hover:text-cyan-400 transition-colors text-sm"
             >
               Decline
             </button>
