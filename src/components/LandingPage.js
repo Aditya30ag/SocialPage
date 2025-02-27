@@ -18,6 +18,8 @@ import Contact from "./Contact";
 import IntroAnimation from "./IntroAnimation ";
 import FAQSection from "./Faq";
 import Chatbot from "./Chatbot";
+import AttentionHeatmap from "./HeatMap";
+import CookiePolicy from "./CookiePolicy";
 
 const LandingPage = () => {
   const [isVisible, setIsVisible] = useState({});
@@ -97,7 +99,7 @@ const LandingPage = () => {
     <div className="min-h-screen bg-black text-slate-50 font-sans overflow-hidden" id="home">
      
       <IntroAnimation/>
-
+      <CookiePolicy/>
       {/* Companies Marquee */}
       <div className="py-8 bg-black/60 backdrop-blur-xl border-t border-b border-slate-800/50 overflow-hidden relative">
         <div className="w-full overflow-hidden">
@@ -272,7 +274,9 @@ const LandingPage = () => {
 
       {/* Footer */}
       <Footer />
+      {/* <AttentionHeatmap/> */}
             <Chatbot/>
+            
       <style>{`
         @keyframes marquee {
           0% {
