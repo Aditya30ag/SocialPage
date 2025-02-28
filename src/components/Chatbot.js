@@ -202,7 +202,7 @@ export default function Chatbot() {
       setCurrentOptions([
         "I'm a company hiring",
         "I'm an influencer",
-        "I'm looking for a job"
+        "I'm looking for a job",
       ]);
     }
   }, [isOpen]);
@@ -216,7 +216,7 @@ export default function Chatbot() {
       case "I'm a company hiring":
         type = USER_TYPES.COMPANY;
         response = "Great! You can register your company at register.hirecentive.com/company to start hiring through our network.";
-        nextOptions = ["Learn More", "Contact Support", "Close Chat"];
+        nextOptions = ["Learn More", "Contact Support", "Close Chat","Back to Main Menu"];
         break;
       case "I'm an influencer":
         type = USER_TYPES.INFLUENCER;
@@ -227,13 +227,14 @@ export default function Chatbot() {
           "Registration process",
           "Payment details",
           "What type of content should I share?",
-          "Contact Support"
+          "Contact Support",
+          "Back to Main Menu"
         ];
         break;
       case "I'm looking for a job":
         type = USER_TYPES.CANDIDATE;
         response = "Great! You can register to browse opportunities and connect with our network of influencers.";
-        nextOptions = ["Register Now!", "Contact Support", "Close Chat"];
+        nextOptions = ["Register Now!", "Contact Support", "Close Chat","Back to Main Menu"];
         break;
     }
 
@@ -250,7 +251,7 @@ export default function Chatbot() {
     setCurrentOptions([
       "I'm a company hiring",
       "I'm an influencer",
-      "I'm looking for a job"
+      "I'm looking for a job",
     ]);
   };
   const handleContactFormSubmit = (formData) => {
@@ -277,7 +278,7 @@ export default function Chatbot() {
         setCurrentOptions([
           "I'm a company hiring",
           "I'm an influencer",
-          "I'm looking for a job"
+          "I'm looking for a job",
         ]);
         break;
 
@@ -327,7 +328,7 @@ export default function Chatbot() {
         flex flex-col overflow-hidden animate-slide-up z-50 overflow-y-auto scrollbar-none">
 
           {/* Updated Header */}
-          <div className="p-4 border-b border-slate-800 bg-gradient-to-r from-cyan-400/10 to-violet-500/10">
+          <div className="p-4 border-b border-slate-800 bg-gradient-to-r from-cyan-400/10 to-violet-500/10 overflow-y-auto scrollbar-none">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-3">
                 {showBackButton && (
@@ -353,7 +354,9 @@ export default function Chatbot() {
           </div>
 
           {/* Messages Container */}
-          <div className="flex-1 overflow-y-auto p-4">
+          {/* Messages Container */}
+<div className="flex-1 overflow-y-auto p-4 scrollbar-thin scrollbar-thumb-green-800 scrollbar-track-transparent">
+
             {messages.map((message, index) => (
               <ChatMessage key={index} message={message.text} isUser={message.isUser} />
             ))}

@@ -21,9 +21,26 @@
     background: #94a3b8; /* Lighter thumb on hover */
   }
   @layer utilities {
-    .scrollbar-none::-webkit-scrollbar {
+    .scrollbar-none::-webkit-scroll
+    
+    bar {
       display: none;
     }
   }
+
+  /* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3b82f6, #024f0a); /* Tailwind blue-500 */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
   
   

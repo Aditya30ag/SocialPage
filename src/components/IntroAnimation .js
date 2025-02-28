@@ -120,7 +120,7 @@ const IntroAnimation = () => {
                 Join the Movement
               </h2>
               <button className="group relative px-8 sm:px-10 py-4 sm:py-5 rounded-xl text-xl sm:text-2xl lg:text-3xl font-bold transition-all duration-300 hover:scale-110 animate-pulse" onClick={() => scrollToSection("contact-us")}>
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-xl"></div>
                 <div className="absolute inset-0.5 bg-black rounded-xl"></div>
                 <span className="relative z-10 flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
                   Get Your Unique Link
