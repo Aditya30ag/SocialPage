@@ -24,26 +24,37 @@ const CookieBanner = () => {
     setShowPopup(false);
     window.location.reload();
   };
+
+  const denyCookies = () => {
+    localStorage.setItem("cookiesDenied", "true");
+    setShowPopup(false);
+  };
+
   return (
     showPopup && (
-      <div className="fixed w-1/2 bottom-4 left-4 right-4 md:left-6 md:right-6 lg:left-10 lg:right-10 z-50 p-4 bg-gray-900/90 backdrop-blur-lg border border-gray-800 rounded-lg shadow-lg flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 animate-fadeIn transition-all">
-        {/* Cookie Text */}
-        <p className="text-sm text-gray-300 text-center md:text-left">
-          We use cookies to enhance your experience. By continuing, you agree to
-          our{" "}
+      <div className="fixed bottom-0 left-0 z-[9999] p-3 md:p-4 bg-gray-900/50 backdrop-blur-lg border border-gray-800 rounded-r-lg shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 md:gap-4 animate-fadeIn transition-all w-full sm:w-4/5 md:w-3/4 lg:w-1/2">
+        <p className="text-xs sm:text-sm text-gray-300 mb-2 sm:mb-0">
+          We use cookies to enhance your experience. By continuing, you agree to{" "}
           <a href="/privacypolicy" className="text-blue-400 hover:underline">
             privacy policy
           </a>
           .
         </p>
 
-        {/* Button */}
-        <button
-          onClick={acceptCookies}
-          className="bg-blue-500 text-white text-sm font-medium px-5 py-2 rounded-md hover:bg-blue-600 transition-all"
-        >
-          Accept
-        </button>
+        <div className="flex items-center gap-2 self-end sm:self-auto">
+          <button
+            onClick={denyCookies}
+            className="bg-gray-700 text-white text-xs sm:text-sm font-medium px-2 sm:px-3 py-1.5 sm:py-2 rounded-md hover:bg-gray-600 transition-all"
+          >
+            Deny
+          </button>
+          <button
+            onClick={acceptCookies}
+            className="bg-blue-500 text-white text-xs sm:text-sm font-medium px-3 sm:px-5 py-1.5 sm:py-2 rounded-md hover:bg-blue-600 transition-all"
+          >
+            Accept
+          </button>
+        </div>
       </div>
     )
   );
