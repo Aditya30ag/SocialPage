@@ -34,7 +34,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #3b82f6, #024f0a); /* Tailwind blue-500 */
+  background: linear-gradient(180deg, #3b82f6, #040404); /* Tailwind blue-500 */
   border-radius: 10px;
 }
 
