@@ -45,77 +45,134 @@ const TermsAndConditions = () => {
     {
       id: 1,
       title: "Introduction",
-      content: `Welcome to Hirecentive Social, operated by Hirecentive Network Technologies LLP, a company registered in Karnataka, India (hereinafter referred to as "Company," "we," "us," or "our"). These Terms and Conditions ("Terms") govern the use of the Hirecentive Social platform ("Platform") by all users, including job seekers, influencers, recruiters, and businesses ("Users"). By accessing or using the Platform, you expressly agree to be bound by these legally binding Terms. If you do not agree to these Terms, you must immediately discontinue use of the Platform.`,
+      content: `• Welcome to Hirecentive Social, operated by Hirecentive Network Technologies LLP, a company registered in Karnataka, India.
+      • These Terms and Conditions govern the use of the Hirecentive Social platform by all users.
+      • By accessing or using the Platform, you expressly agree to be bound by these legally binding Terms.
+      • If you do not agree to these Terms, you must immediately discontinue use of the Platform.`
     },
     {
       id: 2,
       title: "Services Provided",
-      content: `Hirecentive Social is a job-matching and influencer-based recruitment platform that enables influencers to refer job seekers using a unique referral link. Users understand and acknowledge that the Platform is solely a facilitator of job connections and does not guarantee employment. Influencers who refer candidates may receive incentives based on successful placements, subject to Hirecentive Social’s sole discretion and verification processes.`,
+      content: `• Hirecentive Social is a job-matching and influencer-based recruitment platform enabling influencers to refer job seekers.
+      • The Platform facilitates job matching between employers and candidates through referrals by social media influencers.
+      • Disclaimer of Agency: The Company acts solely as an intermediary and does not guarantee employment or salary outcomes.
+      • Verification Efforts: While we undertake reasonable efforts to onboard verified businesses, we do not warrant the legitimacy of all job listings.`
     },
     {
       id: 3,
       title: "Eligibility & Compliance",
-      content: `Users must be at least 18 years old and legally competent to enter binding contracts under Indian law. Users agree to provide only true, complete, and accurate information at all times. Employers and recruiters must comply with all applicable employment laws and regulations in their respective jurisdictions.`,
+      content: `• Users must be at least 18 years old and legally competent to enter binding contracts under Indian law.
+      • Users agree to provide only true, complete, and accurate information at all times.
+      • Employers and recruiters must comply with all applicable employment laws and regulations.
+      • Users must adhere to all instructions, policies, and processes dictated by Hirecentive Social.
+      • Users are solely responsible for maintaining account confidentiality and accuracy of information.
+      • Hirecentive Social reserves the right to deny access, suspend, or terminate any User account found in violation of these Terms.`
     },
     {
       id: 4,
       title: "User Obligations & Prohibited Conduct",
-      content: `Users expressly agree to refrain from posting, submitting, or endorsing any false, misleading, or fraudulent job listings. Users must not engage in spamming, phishing, data scraping, or unauthorized commercial use of the Platform.`,
+      content: `Users expressly agree to:\n
+Refrain from posting, submitting, or endorsing any false, misleading, or fraudulent job listings.\t
+Not engage in spamming, misrepresentation, deceptive advertising, or unethical marketing tactics.\t
+Use the Platform responsibly and not engage in any activity that disrupts, damages, or compromises its functionality.\t
+Strictly follow all payment and incentive terms set forth by Hirecentive Social.\t
+Immediately notify Hirecentive Social of any unauthorized access, breach, or suspicious activity on their accounts.\t
+Accept and comply with any platform modifications, updates, and policy changes introduced by Hirecentive Social.\t
+
+      • Users shall provide truthful, complete, and updated information.
+      • Users must comply with all applicable laws, including the Information Technology Act, 2000.
+      • Users must report suspicious job postings or misconduct immediately.
+      • Prohibited Conduct: Users must not post fake listings, engage in spamming, phishing, data scraping, or reverse engineer the Platform.
+      • Users must not misrepresent affiliation with the Company or third parties.
+      • Violations may result in termination, legal action, and forfeiture of incentives.`
     },
     {
       id: 5,
       title: "Payment, Incentives & Tax Liability",
-      content: `Influencer incentives will be determined exclusively by Hirecentive Social. Payments will only be processed after successful job placements and verification by Hirecentive Social.`,
+      content: `• Influencer incentives will be determined exclusively by Hirecentive Social.
+      • Payments will only be processed after successful job placements and verification.
+      • Incentives are not guaranteed and may be revoked if fraud or misconduct is suspected.
+      • Users are responsible for any applicable taxes, fees, or reporting requirements.
+      • Tax Compliance: Users bear full responsibility for tax liabilities (e.g., GST, income tax).
+      • Modification Rights: The Company reserves the right to alter incentive structures without prior notice.`
     },
     {
       id: 6,
       title: "Communication & Notifications",
-      content: `Hirecentive Social will send notifications and important updates through email and WhatsApp. The mode of communication may be subject to change, and users will receive prior notice before any modifications take effect. Users must ensure that their contact details are accurate and up to date to avoid missing critical information.`,
+      content: `• Hirecentive Social will communicate via email, WhatsApp, SMS, or other digital platforms.
+      • Users must ensure their contact details are up-to-date.
+      • Users consent to receive transactional and promotional communications.
+      • Opt-out instructions will be provided, but critical service-related communications cannot be disabled.
+      • The mode of communication may be updated at any time.`
     },
     {
       id: 7,
       title: "Liability, Disclaimers & Indemnification",
-      content: `Hirecentive Social does not guarantee job placement, security, or employment outcomes. Users acknowledge that they use the Platform at their own risk.`,
+      content: `• Hirecentive Social does not guarantee job placement, security, or employment outcomes.
+      • The Platform is strictly a job-matching facilitator and not responsible for disputes between parties.
+      • No Warranties: The Platform is provided "as-is" with no warranties, express or implied.
+      • Liability Cap: The Company's liability for any claim shall not exceed INR 5,000 or fees paid in the preceding six months.
+      • Exclusion of Damages: The Company is not liable for indirect, consequential, or incidental damages.`
     },
     {
       id: 8,
       title: "Account Termination & Enforcement",
-      content: `Hirecentive Social may immediately suspend or terminate accounts violating these Terms without prior notice.`,
+      content: `• Hirecentive Social may immediately suspend or terminate accounts violating these Terms without notice.
+      • Hirecentive Social may report fraudulent activities to law enforcement.
+      • Users whose accounts are terminated forfeit all unpaid incentives and are permanently banned.
+      • The Company may suspend accounts for violations, fraud, or unlawful conduct.`
     },
     {
       id: 9,
       title: "Intellectual Property & Restrictions",
-      content: `All trademarks, content, software, and proprietary information on the Platform exclusively belong to Hirecentive Network Technologies LLP.`,
+      content: `• All trademarks, content, software, and proprietary information exclusively belong to Hirecentive Network Technologies LLP.
+      • Users must not copy, distribute, modify, or exploit any aspect of the Platform without authorization.
+      • Users grant a non-exclusive, revocable license for the Company to use User-generated content.
+      • Unauthorized reproduction, distribution, or creation of derivative works is prohibited.`
     },
     {
       id: 10,
       title: "Legal Compliance & Dispute Resolution",
-      content: `Users agree that all legal matters related to the Platform shall be governed exclusively by the laws of India.`,
+      content: `• Users agree that all legal matters shall be governed exclusively by the laws of India.
+      • Any disputes shall be exclusively resolved in the courts of Karnataka, India.
+      • Users waive any right to class-action lawsuits and agree to resolve disputes individually.
+      • Exclusive Jurisdiction: All disputes shall be adjudicated in courts in Karnataka, India.
+      • Mediation: Parties agree to attempt mediation through the Karnataka Mediation Centre before litigation.`
     },
     {
       id: 11,
       title: "Policy Updates & User Acceptance",
-      content: `Hirecentive Social reserves the unilateral right to update, modify, or replace these Terms at any time.`,
+      content: `• Hirecentive Social reserves the right to update, modify, or replace these Terms at any time.
+      • Users will be notified of significant changes.
+      • Continued use of the Platform constitutes acceptance of the updated Terms.
+      • These Terms are governed by Indian law, excluding conflict of laws principles.`
     },
     {
       id: 12,
       title: "Indemnification",
-      content: `Users agree to indemnify the Company, its directors, and affiliates against all claims, losses, legal fees, or damages resulting from a breach of these Terms.`,
+      content: `• Users agree to indemnify the Company, its directors, and affiliates against all claims, losses, legal fees, or damages resulting from:
+        - Breach of these Terms
+        - Misuse of the Platform
+        - Violation of third-party rights (e.g., intellectual property, privacy)`
     },
     {
       id: 13,
       title: "Updates and Severability",
-      content: `The Company may amend these Terms unilaterally. Continued use post-update constitutes acceptance.`,
+      content: `• The Company may amend these Terms unilaterally. Continued use post-update constitutes acceptance.
+      • If any provision is deemed unenforceable, the remainder remains valid.`
     },
     {
       id: 14,
       title: "Grievance Officer",
-      content: `For complaints or reporting violations, contact: Email: connect@hirecentive.com Address: Hirecentive Network Technologies LLP, Mangalore - 575004.`,
+      content: `• For complaints or reporting violations, contact:
+        - Email: connect@hirecentive.com
+        - Address: Hirecentive Network Technologies LLP, [Registered Office Address], Mangalore - 575004.`
     },
     {
       id: 15,
       title: "Miscellaneous",
-      content: `Force Majeure: The Company is not liable for delays or failures due to events beyond reasonable control.`,
+      content: `• Force Majeure: The Company is not liable for delays or failures due to events beyond reasonable control.
+      • Entire Agreement: These Terms supersede prior agreements. No oral or written modification is binding unless executed by the Company.`
     },
     {
       id: 16,
