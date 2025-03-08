@@ -130,7 +130,7 @@ const TermsAndConditions = () => {
 `,
     },
     {
-      id: 16,
+      id: 18,
       title: "Data Privacy, Collection, Retention, and Deletion Policy",
       content: `We collect personal data—including, but not limited to, your name, contact details, government-issued identification numbers, and other relevant information—solely for the purpose of verifying your identity, ensuring secure transactions, and enhancing your experience on the Platform.
     
@@ -153,7 +153,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 17,
+      id: 19,
       title: "User Verification and Background Checks",
       content: `A. Verification Requirements:
       • All Users are required to undergo a background verification process using valid government-issued identification cards and numbers.
@@ -164,7 +164,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 18,
+      id: 20,
       title: "Payment Collection (Payin) and Payout Collection Policies",
       content: `A. Payment Collection:
       • All payments (payins) made on the Platform will be processed securely via our designated payment gateway.
@@ -177,7 +177,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 19,
+      id: 21,
       title: "Third-Party Services and Integrations",
       content: `A. Service Integration:
       • The Platform may integrate with third-party services for functionalities such as payment processing, background verification, and data analytics.
@@ -188,7 +188,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 20,
+      id: 22,
       title: "Anti-Phishing, Anti-Spam, and Anti-Scam Policies",
       content: `A. Platform Security:
       • The Company employs robust measures to detect and prevent phishing, spamming, and scam activities on the Platform.
@@ -199,7 +199,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 21,
+      id: 23,
       title: "Detailed Representations and Warranties",
       content: `A. Accuracy of Information:
       • Users must ensure all information provided during registration and verification is accurate, current, and complete.
@@ -209,7 +209,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 22,
+      id: 24,
       title: "Document Verification & Compliance",
       content: `A. Mandatory Document Submission:
       • Users must provide valid government-issued identification, proof of address, and any other documents as required by Hirecentive Social.
@@ -220,7 +220,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 23,
+      id: 25,
       title: "Confidentiality Obligations",
       content: `A. Data Handling:
       • All personal and sensitive data collected will be treated as confidential and will not be shared without explicit consent, except where required by law.
@@ -230,7 +230,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 24,
+      id: 26,
       title: "Indemnity and Liability Clauses",
       content: `A. Scope of Indemnity:
       • Users shall indemnify Hirecentive Social against all claims, liabilities, damages, and expenses arising from:
@@ -243,7 +243,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 25,
+      id: 27,
       title: "Force Majeure Clause",
       content: `A. Coverage:
       • Neither party will be liable for non-performance due to events beyond reasonable control, such as natural disasters, pandemics, or cyberattacks.
@@ -253,7 +253,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 26,
+      id: 28,
       title: "Anti-Corruption and Anti-Fraud Policy",
       content: `A. Prohibited Activities:
       • Users must not engage in any bribery, corruption, or fraudulent activities on the platform.
@@ -263,7 +263,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 27,
+      id: 29,
       title: "Vendor Code of Conduct",
       content: `A. For Business Users:
       • If businesses use the platform for hiring, they must adhere to a Vendor Code of Conduct, which includes compliance with applicable labor laws, anti-corruption policies, and maintaining ethical business practices.
@@ -273,7 +273,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 28,
+      id: 30,
       title: "Business Continuity Plan",
       content: `A. Service Availability:
       • Hirecentive Social will maintain a business continuity plan to ensure platform availability during unforeseen events.
@@ -283,7 +283,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 29,
+      id: 31,
       title: "Exclusivity and Publicity",
       content: `A. Non-Exclusivity:
       • The platform may engage with multiple businesses and influencers without exclusive agreements.
@@ -293,7 +293,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 30,
+      id: 32,
       title: "Intellectual Property Rights",
       content: `A. Ownership:
       • All platform content, branding, and intellectual property belong exclusively to Hirecentive Social.
@@ -303,7 +303,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 31,
+      id: 33,
       title: "Refund Policy",
       content: `A. Non-Refundable Services:
       • All payments made to Hirecentive Social, including but not limited to commissions, service fees, and subscription charges, are non-refundable except as expressly provided in this policy.
@@ -325,7 +325,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 32,
+      id: 34,
       title: "Security Deposit and Advance Payment Policy",
       content: `A. Advance Payments:
       • Hirecentive Social may require an advance payment or security deposit for certain services, including enterprise solutions and custom recruitment services.
@@ -341,7 +341,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 33,
+      id: 35,
       title: "Payment Dispute Resolution Policy",
       content: `A. Dispute Notification:
       • Users must notify Hirecentive Social of any billing disputes or discrepancies within 15 days of invoice receipt.
@@ -358,7 +358,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 34,
+      id: 36,
       title: "Confidentiality of Billing & Financial Data",
       content: `A. Data Handling:
       • All financial information provided for billing purposes, including bank details, GST numbers, and transaction records, will be stored securely and only used for transaction processing and verification.
@@ -371,7 +371,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 35,
+      id: 37,
       title: "Audit and Compliance Policy",
       content: `A. Right to Audit:
       • Hirecentive Social reserves the right to audit financial transactions, user activities, and service usage records to ensure compliance with the Terms & Conditions.
@@ -387,7 +387,7 @@ const TermsAndConditions = () => {
     },
 
     {
-      id: 36,
+      id: 38,
       title: "Payment Terms & Billing Policy",
       content: `A. Commission Structure:
       • The standard commission fee is 20 days of the hired candidate's work year's salary, plus applicable GST, which will be billed as a separate component.
@@ -572,11 +572,12 @@ const TermsAndConditions = () => {
                       <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
                       <div className="relative bg-black/50 backdrop-blur-lg p-4 sm:p-6 rounded-lg border border-gray-800 shadow-lg h-full flex flex-col">
                         <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-3 sm:mb-4">
+                          {typeof section.id === "number" && section.id}{" "}
                           {section.title}
                         </h3>
                         <div
                           ref={(el) => (contentRefs.current[section.id] = el)}
-                          className={`text-gray-300 text-sm sm:text-base whitespace-pre-line leading-relaxed transition-all duration-300 flex-grow ${
+                          className={`text-gray-300 text-sm sm:text-base whitespace-pre-line leading-relaxed ${
                             isExpanded ? "" : "line-clamp-4"
                           }`}
                         >
@@ -585,12 +586,12 @@ const TermsAndConditions = () => {
                         {overflowSections[section.id] && (
                           <button
                             onClick={() => toggleSection(section.id)}
-                            className="mt-3 sm:mt-4 text-cyan-400 hover:text-cyan-300 transition-colors self-start text-sm sm:text-base flex items-center gap-1"
+                            className="mt-3 sm:mt-4 text-cyan-400 hover:text-cyan-300 transition-colors text-sm sm:text-base flex items-center gap-1"
                           >
                             {isExpanded ? "Read Less" : "Read More"}
                             <ChevronUp
                               className={`w-4 h-4 transition-transform ${
-                                !isExpanded ? "rotate-180" : ""
+                                isExpanded ? "" : "rotate-180"
                               }`}
                             />
                           </button>

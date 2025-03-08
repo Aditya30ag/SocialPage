@@ -254,45 +254,46 @@ const PrivacyPolicy = () => {
 
         {/* Main Content */}
         <main className="relative px-2 sm:px-4">
-          <div className="relative bg-black/50 backdrop-blur-lg p-3 sm:p-4 rounded-lg border border-gray-800 shadow-lg">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-              {filteredSections.map((section) => {
-                const isExpanded = expandedSections[section.id];
-                return (
-                  <article key={section.id} className="group relative">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
-                    <div className="relative bg-black/50 backdrop-blur-lg p-4 sm:p-6 rounded-lg border border-gray-800 shadow-lg h-full flex flex-col">
-                      <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-3 sm:mb-4">
-                        {section.title}
-                      </h3>
-                      <div
-                        ref={(el) => (contentRefs.current[section.id] = el)}
-                        className={`text-gray-300 text-sm sm:text-base whitespace-pre-line leading-relaxed transition-all duration-300 flex-grow ${
-                          isExpanded ? "" : "line-clamp-4"
-                        }`}
-                      >
-                        {section.content}
+                    <div className="relative bg-black/50 backdrop-blur-lg p-3 sm:p-4 rounded-lg border border-gray-800 shadow-lg">
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                        {filteredSections.map((section) => {
+                          const isExpanded = expandedSections[section.id];
+                          return (
+                            <article key={section.id} className="group relative">
+                              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
+                              <div className="relative bg-black/50 backdrop-blur-lg p-4 sm:p-6 rounded-lg border border-gray-800 shadow-lg h-full flex flex-col">
+                                <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text mb-3 sm:mb-4">
+                                  {typeof section.id === "number" && section.id}{" "}
+                                  {section.title}
+                                </h3>
+                                <div
+                                  ref={(el) => (contentRefs.current[section.id] = el)}
+                                  className={`text-gray-300 text-sm sm:text-base whitespace-pre-line leading-relaxed ${
+                                    isExpanded ? "" : "line-clamp-4"
+                                  }`}
+                                >
+                                  {section.content}
+                                </div>
+                                {overflowSections[section.id] && (
+                                  <button
+                                    onClick={() => toggleSection(section.id)}
+                                    className="mt-3 sm:mt-4 text-cyan-400 hover:text-cyan-300 transition-colors text-sm sm:text-base flex items-center gap-1"
+                                  >
+                                    {isExpanded ? "Read Less" : "Read More"}
+                                    <ChevronUp
+                                      className={`w-4 h-4 transition-transform ${
+                                        isExpanded ? "" : "rotate-180"
+                                      }`}
+                                    />
+                                  </button>
+                                )}
+                              </div>
+                            </article>
+                          );
+                        })}
                       </div>
-                      {overflowSections[section.id] && (
-                        <button
-                          onClick={() => toggleSection(section.id)}
-                          className="mt-3 sm:mt-4 text-cyan-400 hover:text-cyan-300 transition-colors self-start text-sm sm:text-base flex items-center gap-1"
-                        >
-                          {isExpanded ? "Read Less" : "Read More"}
-                          <ChevronUp
-                            className={`w-4 h-4 transition-transform ${
-                              !isExpanded ? "rotate-180" : ""
-                            }`}
-                          />
-                        </button>
-                      )}
                     </div>
-                  </article>
-                );
-              })}
-            </div>
-          </div>
-        </main>
+                  </main>
         <div className="w-full max-w-4xl mx-auto p-4 sm:p-6 rounded-lg shadow-md mt-4">
             <div className="text-center mb-6 sm:mb-8">
               <h1 className="text-2xl sm:text-3xl font-bold text-cyan-600 mb-1 sm:mb-2">
