@@ -354,12 +354,7 @@ const PrivacyPolicy = () => {
                       <span>Email Us</span>
                     </h3>
                     <div className="text-sm sm:text-base">
-                      <a
-                        href="mailto:kaushal@hirecentive.com"
-                        className="text-cyan-600 hover:text-cyan-700 transition-colors block sm:inline-block"
-                      >
-                        kaushal@hirecentive.com
-                      </a>
+                      
                       <p className="mt-1 sm:mt-2">
                         <a
                           href="mailto:connect@hirecentive.com"

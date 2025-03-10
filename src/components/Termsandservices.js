@@ -98,9 +98,7 @@ const TermsAndConditions = () => {
   5.1. Influencers may earn incentives for successful referrals, subject to:
   The candidate's verified employment via the referral link.
   The Company's sole discretion and anti-fraud checks.
-  
   5.2. Tax Compliance: Users bear full responsibility for tax liabilities (e.g., GST, income tax) arising from incentives. The Company may withhold payments pending tax documentation.
-  
   5.3. Modification Rights: The Company reserves the right to alter incentive structures, eligibility, or payment timelines without prior notice.`
     },
     {
@@ -587,12 +585,7 @@ const TermsAndConditions = () => {
                       <span>Email Us</span>
                     </h3>
                     <div className="text-sm sm:text-base">
-                      <a
-                        href="mailto:kaushal@hirecentive.com"
-                        className="text-cyan-600 hover:text-cyan-700 transition-colors block sm:inline-block"
-                      >
-                        kaushal@hirecentive.com
-                      </a>
+                     
                       <p className="mt-1 sm:mt-2">
                         <a
                           href="mailto:connect@hirecentive.com"
